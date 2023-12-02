@@ -4,19 +4,21 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
+public class DropwizardWebServiceApplication
+        extends Application<DropwizardWebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {
         new DropwizardWebServiceApplication().run(args);
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return "DropwizardWebService";
     }
 
     @Override
-    public void initialize(final Bootstrap<DropwizardWebServiceConfiguration> bootstrap) {
+    public void initialize(
+            final Bootstrap<DropwizardWebServiceConfiguration> bootstrap) {
         // TODO: application initialization
     }
 
