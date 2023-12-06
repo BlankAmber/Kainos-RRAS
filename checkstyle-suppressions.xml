@@ -7,4 +7,6 @@
 <suppressions>
     <suppress checks="Javadoc" files="."/>
     <suppress checks="TodoComment" files="."/>
+    <suppress checks="DesignForExtension" files="."/>
+    <suppress checks="FinalParameters" files="."/>
 </suppressions>
