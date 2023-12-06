@@ -12,7 +12,7 @@ public class DropwizardWebServiceApplication
     }
 
     @Override
-    public final String getName() {
+    public String getName() {
         return "DropwizardWebService";
     }
 
