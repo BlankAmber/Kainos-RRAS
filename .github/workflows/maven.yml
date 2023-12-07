@@ -22,4 +22,15 @@ jobs:
         cache: maven
       
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn -B clean install -DskipTests
+
+    - name: Run linter
+      run: mvn checkstyle:check
+
+    - name: Run tests
+      env:
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+      run: mvn test
