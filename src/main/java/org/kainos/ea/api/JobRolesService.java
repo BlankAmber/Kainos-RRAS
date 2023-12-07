@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JobRolesService {
 
-    JobRolesDao jobRolesDao = new JobRolesDao();
+    private final JobRolesDao jobRolesDao = new JobRolesDao();
 
     public List<JobRole> getAllJobRoles() throws FailedToGetAllJobRolesException {
         List<JobRole> jobRolesList = null;
@@ -23,4 +23,6 @@ public class JobRolesService {
 
         return jobRolesList;
     }
+
+
 }

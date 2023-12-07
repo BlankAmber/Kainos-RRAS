@@ -21,8 +21,8 @@ public class JobRolesDao {
 
         while (rs.next()) {
             JobRole jobRoles = new JobRole(
-                    rs.getInt("job_roles_id"),
-                    rs.getString("job_roles_name")
+                    rs.getInt("job_role_id"),
+                    rs.getString("job_role_name")
 
             );
 
