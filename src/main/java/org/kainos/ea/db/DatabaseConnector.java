@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public final class DatabaseConnector {
+public class DatabaseConnector {
     public static final String ENV_DB_USERNAME = "DB_USERNAME";
     public static final String ENV_DB_PASSWORD = "DB_PASSWORD";
     public static final String ENV_DB_HOST = "DB_HOST";
@@ -12,24 +12,16 @@ public final class DatabaseConnector {
 
     private static Connection connection;
 
-    public static void resetConnection() {
-        DatabaseConnector.connection = null;
-    }
-
-    private DatabaseConnector() {
-
-    }
-
-    public static DatabaseProperties getDatabaseProperties() {
-        String user = System.getenv(ENV_DB_USERNAME);
+    public DatabaseProperties getDatabaseProperties() {
+        String username = System.getenv(ENV_DB_USERNAME);
         String password = System.getenv(ENV_DB_PASSWORD);
         String host = System.getenv(ENV_DB_HOST);
         String name = System.getenv(ENV_DB_NAME);
 
-        return new DatabaseProperties(user, password, host, name);
+        return new DatabaseProperties(username, password, host, name);
     }
 
-    public static Connection getConnection(DatabaseProperties props)
+    public Connection getConnection(DatabaseProperties props)
             throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:mysql://" + props.getHost() + "/" + props.getName()
@@ -37,7 +29,7 @@ public final class DatabaseConnector {
                 props.getUsername(), props.getPassword());
     }
 
-    public static Connection getConnection()
+    public Connection getConnection()
             throws SQLException {
         if (DatabaseConnector.connection != null
                 && !DatabaseConnector.connection.isClosed()) {
