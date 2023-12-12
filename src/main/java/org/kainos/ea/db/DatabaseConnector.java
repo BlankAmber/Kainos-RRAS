@@ -16,7 +16,7 @@ public final class DatabaseConnector {
         DatabaseConnector.connection = null;
     }
 
-    private DatabaseConnector() {
+    public DatabaseConnector() {
 
     }
 

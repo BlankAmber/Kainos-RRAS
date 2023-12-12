@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRolesDao {
-    public List<JobRole> getAllJobRoles() throws SQLException {
+    public List<JobRole> getAllJobRoles(Connection c) throws SQLException {
         Connection connection = DatabaseConnector.getConnection();
 
         Statement s = connection.createStatement();

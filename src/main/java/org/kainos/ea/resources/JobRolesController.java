@@ -2,6 +2,8 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
+import org.kainos.ea.db.DatabaseConnector;
+import org.kainos.ea.db.JobRolesDao;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,7 +15,13 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class JobRolesController {
 
-    private JobRolesService jobRolesService = new JobRolesService();
+
+    private static JobRolesService jobRolesService;
+
+    public JobRolesController() {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        jobRolesService = new JobRolesService(new JobRolesDao(), databaseConnector);
+    }
 
     @GET
     @Path("/all-job-roles")
