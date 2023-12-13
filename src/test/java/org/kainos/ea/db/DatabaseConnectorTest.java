@@ -15,7 +15,8 @@ public class DatabaseConnectorTest {
     @Test
     @DisplayName("Test valid SQL connection")
     void testSQLConnectionValid() throws SQLException {
-        Connection connection = DatabaseConnector.getConnection();
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
         assertNotNull(connection);
         assertFalse(connection.isClosed());
     }

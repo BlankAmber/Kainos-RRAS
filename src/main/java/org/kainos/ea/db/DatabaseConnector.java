@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public final class DatabaseConnector {
+public class DatabaseConnector {
     public static final String ENV_DB_USERNAME = "DB_USERNAME";
     public static final String ENV_DB_PASSWORD = "DB_PASSWORD";
     public static final String ENV_DB_HOST = "DB_HOST";
@@ -37,7 +37,7 @@ public final class DatabaseConnector {
                 props.getUsername(), props.getPassword());
     }
 
-    public static Connection getConnection()
+    public Connection getConnection()
             throws SQLException {
         if (DatabaseConnector.connection != null
                 && !DatabaseConnector.connection.isClosed()) {

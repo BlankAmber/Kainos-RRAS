@@ -1,6 +1,7 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.JobRole;
+
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;

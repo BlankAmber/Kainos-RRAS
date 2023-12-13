@@ -1,5 +1,7 @@
 package org.kainos.ea.cli;
 
+import org.w3c.dom.Text;
+
 public class JobRole {
 
     private int jobRoleId;
@@ -8,6 +10,7 @@ public class JobRole {
     public JobRole(int jobRoleId, String jobRoleName) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
+
     }
 
     public int getJobRoleId() {

@@ -20,7 +20,8 @@ public class AuthDao {
     private static final int TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN = 8;
 
     public boolean isValidLogin(Login login) {
-        try (Connection conn = DatabaseConnector.getConnection()) {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        try (Connection conn = databaseConnector.getConnection()) {
             Statement statement = conn.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
@@ -54,8 +55,9 @@ public class AuthDao {
         String token = UUID.randomUUID().toString();
         // TODO: Test this with different timezones
         Date expiryDate = DateUtils.addHours(new Date(), TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN);
+        DatabaseConnector databaseConnector = new DatabaseConnector();
 
-        Connection c = DatabaseConnector.getConnection();
+        Connection c = databaseConnector.getConnection();
 
         String insertStatement = "INSERT INTO token (username, token, expiry_date) VALUES (?,?,?)";
 

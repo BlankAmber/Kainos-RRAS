@@ -11,7 +11,8 @@ import java.util.List;
 
 public class JobRolesDao {
     public List<JobRole> getAllJobRoles(Connection c) throws SQLException {
-        Connection connection = DatabaseConnector.getConnection();
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
 
         Statement s = connection.createStatement();
 
