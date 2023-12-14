@@ -1,13 +1,16 @@
 package org.kainos.ea.cli;
 
+
 public class JobRole {
 
     private int jobRoleId;
     private String jobRoleName;
 
+
     public JobRole(int jobRoleId, String jobRoleName) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
+
     }
 
     public int getJobRoleId() {
@@ -25,4 +28,6 @@ public class JobRole {
     public void setJobRoleName(String jobRoleName) {
         this.jobRoleName = jobRoleName;
     }
+
+
 }

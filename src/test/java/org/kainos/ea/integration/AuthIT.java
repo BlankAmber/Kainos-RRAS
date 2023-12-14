@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class AuthIT {
-    static final DropwizardAppExtension<DropwizardWebServiceConfiguration> APP =
-            new DropwizardAppExtension<>(
+    static final DropwizardAppExtension<DropwizardWebServiceConfiguration> APP
+            = new DropwizardAppExtension<>(
                     DropwizardWebServiceApplication.class, null,
-                    new ResourceConfigurationSourceProvider()
+            new ResourceConfigurationSourceProvider()
     );
 
     @Test
