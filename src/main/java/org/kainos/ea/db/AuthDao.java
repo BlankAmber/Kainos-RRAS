@@ -22,8 +22,8 @@ public class AuthDao {
         Statement statement = conn.createStatement();
 
         ResultSet resultSet = statement.executeQuery(
-                "SELECT salt, secured_password FROM user WHERE username = "
-                + "'" + login.getUsername() + "'");
+                "SELECT salt, secured_password FROM user WHERE email = "
+                + "'" + login.getEmail() + "'");
 
         if (resultSet.next()) {
             String salt = resultSet.getString("salt");
@@ -45,16 +45,16 @@ public class AuthDao {
         return false;
     }
 
-    public String generateToken(String username, Connection conn) throws SQLException {
+    public String generateToken(String email, Connection conn) throws SQLException {
         String token = UUID.randomUUID().toString();
         // TODO: Test this with different timezones
         Date expiryDate = DateUtils.addHours(new Date(), TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN);
 
-        String insertStatement = "INSERT INTO token (username, token, expiry_date) VALUES (?,?,?)";
+        String insertStatement = "INSERT INTO token (email, token, expiry_date) VALUES (?,?,?)";
 
         PreparedStatement statement = conn.prepareStatement(insertStatement);
         DaoUtil.populatePreparedStatement(statement,
-                username,
+                email,
                 token,
                 new Timestamp(expiryDate.getTime())
         );

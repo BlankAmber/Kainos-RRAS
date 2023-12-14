@@ -14,14 +14,15 @@ CREATE TABLE role (
 );
 
 CREATE TABLE user (
-    username varchar(30) PRIMARY KEY COLLATE utf8mb4_bin,
+    -- COLLATE utf8mb4_bin ensures case sensitivity
+    email varchar(30) PRIMARY KEY COLLATE utf8mb4_bin,
     role_id varchar(30) NOT NULL REFERENCES role (role_id),
     salt char(8) NOT NULL,
     secured_password varchar(100) NOT NULL
 );
 
 CREATE TABLE token (
-    username varchar(30) REFERENCES user (username),
+    email varchar(30) REFERENCES user (email),
     token varchar(64) NOT NULL,
     expiry_date DATETIME NOT NULL
 );
