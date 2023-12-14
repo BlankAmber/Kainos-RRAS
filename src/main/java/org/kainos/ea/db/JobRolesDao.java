@@ -16,15 +16,16 @@ public class JobRolesDao {
 
         Statement s = connection.createStatement();
 
-        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name FROM job_roles");
+        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles");
 
         List<JobRole> jobRolesList = new ArrayList<>();
 
         while (rs.next()) {
             JobRole jobRoles = new JobRole(
                     rs.getInt("job_role_id"),
-                    rs.getString("job_role_name")
-
+                    rs.getString("job_role_name"),
+                    rs.getString("specification_summary"),
+                    rs.getString("sharepoint_link")
             );
 
             jobRolesList.add(jobRoles);

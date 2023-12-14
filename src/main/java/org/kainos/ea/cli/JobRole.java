@@ -7,9 +7,14 @@ public class JobRole {
     private int jobRoleId;
     private String jobRoleName;
 
-    public JobRole(int jobRoleId, String jobRoleName) {
+    private String jobRoleSpec;
+    private String jobRoleLink;
+
+    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
+        this.jobRoleSpec = jobRoleSpec;
+        this.jobRoleLink = jobRoleLink;
 
     }
 
@@ -27,5 +32,21 @@ public class JobRole {
 
     public void setJobRoleName(String jobRoleName) {
         this.jobRoleName = jobRoleName;
+    }
+
+    public String getJobRoleSpec() {
+        return jobRoleSpec;
+    }
+
+    public void setJobRoleSpec(String jobRoleSpec) {
+        this.jobRoleSpec = jobRoleSpec;
+    }
+
+    public String getJobRoleLink() {
+        return jobRoleLink;
+    }
+
+    public void setJobRoleLink(String jobRoleLink) {
+        this.jobRoleLink = jobRoleLink;
     }
 }
