@@ -1,7 +1,6 @@
 package org.kainos.ea.db;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.kainos.ea.Util;
 import org.kainos.ea.cli.Login;
 
 import java.math.BigInteger;
@@ -54,7 +53,11 @@ public class AuthDao {
         String insertStatement = "INSERT INTO token (username, token, expiry_date) VALUES (?,?,?)";
 
         PreparedStatement statement = conn.prepareStatement(insertStatement);
-        Util.setValues(statement, username, token, new Timestamp(expiryDate.getTime()));
+        DaoUtil.populatePreparedStatement(statement,
+                username,
+                token,
+                new Timestamp(expiryDate.getTime())
+        );
         statement.executeUpdate();
 
         return token;
