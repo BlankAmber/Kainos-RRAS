@@ -11,6 +11,7 @@ import org.kainos.ea.DropwizardWebServiceConfiguration;
 import org.kainos.ea.DropwizardWebServiceApplication;
 import org.kainos.ea.cli.JobRole;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
@@ -30,5 +31,16 @@ public class JobRolesIntegrationTest {
                 .get(List.class);
 
         Assertions.assertTrue(response.size() > 0);
+    }
+
+    @Test
+    @DisplayName("Integration test for returning individual job roles")
+    void getJobRoles_shouldReturnJobRole() {
+        Response response = APP.client().target("http://localhost:8080/api/all-job-roles/1")
+                .request()
+                .get();
+
+        Assertions.assertEquals(200,response.getStatus());
+        Assertions.assertEquals(1, response.readEntity(JobRole.class).getJobRoleId());
     }
 }

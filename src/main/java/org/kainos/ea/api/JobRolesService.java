@@ -2,7 +2,9 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.JobRole;
 
+import org.kainos.ea.client.DatabaseConnectionException;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
+import org.kainos.ea.client.JobRoleDoesNotExistException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 
@@ -33,5 +35,23 @@ public class JobRolesService {
         return jobRolesList;
     }
 
+
+    public JobRole getJobRolesById(int id)
+            throws FailedToGetAllJobRolesException, JobRoleDoesNotExistException, DatabaseConnectionException, SQLException {
+            try {
+                JobRole jobRole = jobRolesDao.getJobRolesById(id);
+
+                if (jobRole == null) {
+                    throw new JobRoleDoesNotExistException();
+                }
+
+                return jobRole;
+            }
+            catch (SQLException e) {
+                System.err.println(e.getMessage());
+
+                throw new FailedToGetAllJobRolesException();
+            }
+    }
 
 }

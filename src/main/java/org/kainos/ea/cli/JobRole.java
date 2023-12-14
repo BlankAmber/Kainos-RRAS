@@ -1,6 +1,5 @@
 package org.kainos.ea.cli;
 
-import org.w3c.dom.Text;
 
 public class JobRole {
 
@@ -9,6 +8,11 @@ public class JobRole {
 
     private String jobRoleSpec;
     private String jobRoleLink;
+
+    public JobRole() {
+        // Default constructor
+    }
+
 
     public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink) {
         this.jobRoleId = jobRoleId;

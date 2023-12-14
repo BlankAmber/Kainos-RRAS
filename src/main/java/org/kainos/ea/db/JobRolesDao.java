@@ -32,4 +32,27 @@ public class JobRolesDao {
         }
         return jobRolesList;
     }
+
+
+
+    public JobRole getJobRolesById(int id) throws SQLException {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
+
+
+        Statement s = connection.createStatement();
+
+        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles" +
+                " where job_role_id = " + id);
+
+        while (rs.next()) {
+            return new JobRole(
+                    rs.getInt("job_role_id"),
+                    rs.getString("job_role_name"),
+                    rs.getString("specification_summary"),
+                    rs.getString("sharepoint_link")
+            );
+        }
+        return null;
+    }
 }
