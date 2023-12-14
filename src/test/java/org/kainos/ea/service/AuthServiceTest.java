@@ -36,7 +36,7 @@ public class AuthServiceTest {
 
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(authDao.isValidLogin(login, conn)).thenReturn(true);
-        Mockito.when(authDao.generateToken(login.getUsername(), conn)).thenReturn(expectedToken);
+        Mockito.when(authDao.generateToken(login.getEmail(), conn)).thenReturn(expectedToken);
 
         assertEquals(expectedToken, authService.login(login));
     }
@@ -58,7 +58,7 @@ public class AuthServiceTest {
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(authDao.isValidLogin(login, conn)).thenReturn(true);
-        Mockito.when(authDao.generateToken(login.getUsername(), conn))
+        Mockito.when(authDao.generateToken(login.getEmail(), conn))
                 .thenThrow(SQLException.class);
 
         assertThrows(FailedToGenerateTokenException.class, () -> authService.login(login));
