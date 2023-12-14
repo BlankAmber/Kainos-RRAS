@@ -20,7 +20,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 @ExtendWith(MockitoExtension.class)
 public class JobRolesServiceTest {
     private final DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
