@@ -19,12 +19,8 @@ import javax.ws.rs.core.Response;
 @Api("RRAS Job Roles API")
 @Path("/api")
 public class JobRolesController {
-    private static JobRolesService jobRolesService;
-
-    public JobRolesController() {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-        jobRolesService = new JobRolesService(new JobRolesDao(), databaseConnector);
-    }
+    private final JobRolesService jobRolesService
+            = new JobRolesService(new JobRolesDao(), new DatabaseConnector());
 
     @GET
     @Path("/all-job-roles")
