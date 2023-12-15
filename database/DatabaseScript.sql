@@ -25,3 +25,8 @@ CREATE TABLE token (
     token varchar(64) NOT NULL,
     expiry_date DATETIME NOT NULL
 );
+
+-- update job_roles table
+ALTER TABLE job_roles
+ADD COLUMN specification_summary VARCHAR(4000),
+ADD COLUMN sharepoint_link VARCHAR(1000);
