@@ -38,20 +38,18 @@ public class JobRolesService {
 
     public JobRole getJobRolesById(int id)
             throws FailedToGetAllJobRolesException, JobRoleDoesNotExistException, DatabaseConnectionException, SQLException {
-            try {
-                JobRole jobRole = jobRolesDao.getJobRolesById(id);
+        try {
+            JobRole jobRole = jobRolesDao.getJobRolesById(id);
 
-                if (jobRole == null) {
-                    throw new JobRoleDoesNotExistException();
-                }
-
-                return jobRole;
+            if (jobRole == null) {
+                throw new JobRoleDoesNotExistException();
             }
-            catch (SQLException e) {
-                System.err.println(e.getMessage());
+            return jobRole;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            throw new FailedToGetAllJobRolesException();
+        }
 
-                throw new FailedToGetAllJobRolesException();
-            }
     }
 
 }

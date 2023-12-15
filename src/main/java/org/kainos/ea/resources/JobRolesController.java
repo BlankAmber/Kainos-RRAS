@@ -25,7 +25,8 @@ public class JobRolesController {
 
     public JobRolesController() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        jobRolesService = new JobRolesService(new JobRolesDao(), databaseConnector);
+        jobRolesService = new JobRolesService(new JobRolesDao()
+                , databaseConnector);
     }
 
     @GET
@@ -46,9 +47,11 @@ public class JobRolesController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJobRolesById(@PathParam("id") int jobRoleId) {
         try {
-            return Response.status(HttpStatus.OK_200).entity(jobRolesService.getJobRolesById(jobRoleId)).build();
-        } catch (SQLException | DatabaseConnectionException | JobRoleDoesNotExistException |
-                 FailedToGetAllJobRolesException e)  {
+            return Response.status(HttpStatus.OK_200)
+                    .entity(jobRolesService.getJobRolesById(jobRoleId)).build();
+        } catch (SQLException | DatabaseConnectionException
+                 | JobRoleDoesNotExistException
+                 | FailedToGetAllJobRolesException e)  {
             System.out.println(e);
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
