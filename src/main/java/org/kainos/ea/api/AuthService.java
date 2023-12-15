@@ -7,6 +7,7 @@ import org.kainos.ea.client.FailedToValidateLoginException;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class AuthService {
@@ -22,9 +23,10 @@ public class AuthService {
             throws FailedToGenerateTokenException,
             FailedToValidateLoginException, FailedToLoginException {
         try {
-            if (authDao.isValidLogin(login, databaseConnector.getConnection())) {
+            Connection conn = databaseConnector.getConnection();
+            if (authDao.isValidLogin(conn, login)) {
                 try {
-                    return authDao.generateJWT(login.getEmail());
+                    return authDao.generateJWT(conn, login.getEmail());
                 } catch (SQLException e) {
                     System.err.println(e.getMessage());
                     throw new FailedToGenerateTokenException();

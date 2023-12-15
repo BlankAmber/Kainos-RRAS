@@ -9,18 +9,15 @@ import org.kainos.ea.cli.Login;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Date;
 
 public class AuthDao {
     private static final int TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN = 8;
 
-    public boolean isValidLogin(Login login, Connection conn) throws SQLException {
-        Statement statement = conn.createStatement();
-
-        ResultSet resultSet = statement.executeQuery(
-                "SELECT secured_password FROM user WHERE email = "
-                + "'" + login.getEmail() + "'");
+    public boolean isValidLogin(Connection conn, Login login) throws SQLException {
+        String statement = "SELECT secured_password FROM user WHERE email = ?";
+        ResultSet resultSet =
+                DaoUtil.executeStatement(conn, statement, true, login.getEmail());
 
         if (resultSet.next()) {
             String securedPassword = resultSet.getString("secured_password");
@@ -30,7 +27,17 @@ public class AuthDao {
         return false;
     }
 
-    public String generateJWT(String email) throws SQLException {
+    public String generateJWT(Connection conn, String email) throws SQLException {
+        String statement = "SELECT role_id FROM user WHERE email = ?";
+        ResultSet resultSet = DaoUtil.executeStatement(conn, statement, true, email);
+
+        int roleId;
+        if (resultSet.next()) {
+            roleId = resultSet.getInt("role_id");
+        } else {
+            return null;
+        }
+
         // TODO: Test this with different timezones
         Date expiryDate = DateUtils.addHours(new Date(), TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN);
 
@@ -39,6 +46,7 @@ public class AuthDao {
                 .withIssuer("auth0")
                 .withSubject(email)
                 .withExpiresAt(expiryDate)
+                .withClaim("role_id", roleId)
                 .sign(algorithm);
     }
 }
