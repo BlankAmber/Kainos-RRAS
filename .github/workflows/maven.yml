@@ -41,4 +41,5 @@ jobs:
       run: mvn clean verify -DskipUnitTests
 
     - name: Run linter
+      if: always()
       run: mvn checkstyle:check
