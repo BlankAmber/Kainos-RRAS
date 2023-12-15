@@ -1,10 +1,4 @@
-package org.kainos.ea.db;
-
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
+package org.kainos.ea.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,13 +29,5 @@ public final class DaoUtil {
             return preparedStatement.executeQuery();
         }
         return preparedStatement.getGeneratedKeys();
-    }
-
-    public static DecodedJWT decodeJWT(String jwt) throws JWTVerificationException {
-        Algorithm algorithm = Algorithm.HMAC256(System.getenv("JWT_SECRET"));
-        JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer("auth0")
-                .build();
-        return verifier.verify(jwt);
     }
 }

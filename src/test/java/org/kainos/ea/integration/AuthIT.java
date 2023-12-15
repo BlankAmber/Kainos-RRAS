@@ -11,8 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.DropwizardWebServiceApplication;
 import org.kainos.ea.DropwizardWebServiceConfiguration;
 import org.kainos.ea.cli.Login;
-import org.kainos.ea.db.DaoUtil;
 import org.kainos.ea.db.RoleID;
+import org.kainos.ea.util.JWTUtil;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -43,13 +43,13 @@ public class AuthIT {
 
         DecodedJWT decodedJWT;
         try {
-            decodedJWT = DaoUtil.decodeJWT(jwt);
+            decodedJWT = JWTUtil.decodeJWT(jwt);
         } catch (JWTVerificationException e) {
             fail();
             return;
         }
         assertEquals(email, decodedJWT.getSubject());
-        assertEquals(RoleID.ADMIN, decodedJWT.getClaim("role_id").asInt());
+        assertEquals(RoleID.ADMIN, JWTUtil.getRoleIdFromDecodedJWT(decodedJWT));
     }
 
     @Test
@@ -66,13 +66,13 @@ public class AuthIT {
 
         DecodedJWT decodedJWT;
         try {
-            decodedJWT = DaoUtil.decodeJWT(jwt);
+            decodedJWT = JWTUtil.decodeJWT(jwt);
         } catch (JWTVerificationException e) {
             fail();
             return;
         }
         assertEquals(email, decodedJWT.getSubject());
-        assertEquals(RoleID.EMPLOYEE, decodedJWT.getClaim("role_id").asInt());
+        assertEquals(RoleID.EMPLOYEE, JWTUtil.getRoleIdFromDecodedJWT(decodedJWT));
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.password4j.Password;
 import org.apache.commons.lang3.time.DateUtils;
 import org.kainos.ea.cli.Login;
+import org.kainos.ea.util.DaoUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
