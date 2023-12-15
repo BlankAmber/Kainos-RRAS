@@ -1,11 +1,9 @@
 package org.kainos.ea.db;
 
+import com.password4j.Password;
 import org.apache.commons.lang3.time.DateUtils;
 import org.kainos.ea.cli.Login;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,24 +20,12 @@ public class AuthDao {
         Statement statement = conn.createStatement();
 
         ResultSet resultSet = statement.executeQuery(
-                "SELECT salt, secured_password FROM user WHERE email = "
+                "SELECT secured_password FROM user WHERE email = "
                 + "'" + login.getEmail() + "'");
 
         if (resultSet.next()) {
-            String salt = resultSet.getString("salt");
-            String saltedPassword = login.getPassword() + salt;
-
-            MessageDigest messageDigest = null;
-            try {
-                messageDigest = MessageDigest.getInstance("SHA-256");
-            } catch (NoSuchAlgorithmException e) {
-                System.err.println("Algorithm not found!");
-            }
-
-            byte[] encodedHash = messageDigest.digest(saltedPassword.getBytes());
-            String securedPassword = String.format("%064x", new BigInteger(1, encodedHash));
-
-            return resultSet.getString("secured_password").equals(securedPassword);
+            String securedPassword = resultSet.getString("secured_password");
+            return Password.check(login.getPassword(), securedPassword).withArgon2();
         }
 
         return false;
