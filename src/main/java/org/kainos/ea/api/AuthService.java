@@ -24,8 +24,7 @@ public class AuthService {
         try {
             if (authDao.isValidLogin(login, databaseConnector.getConnection())) {
                 try {
-                    return authDao.generateToken(login.getEmail(),
-                            databaseConnector.getConnection());
+                    return authDao.generateJWT(login.getEmail());
                 } catch (SQLException e) {
                     System.err.println(e.getMessage());
                     throw new FailedToGenerateTokenException();

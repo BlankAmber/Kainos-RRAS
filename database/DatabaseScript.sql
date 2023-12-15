@@ -25,3 +25,5 @@ CREATE TABLE token (
 
 ALTER TABLE user
     DROP COLUMN salt;
+
+DROP TABLE IF EXISTS token;
