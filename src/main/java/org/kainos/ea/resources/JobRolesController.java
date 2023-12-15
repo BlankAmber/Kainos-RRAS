@@ -1,9 +1,8 @@
 package org.kainos.ea.resources;
+
 import io.swagger.annotations.Api;
-import org.kainos.ea.api.AuthService;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
-import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 
