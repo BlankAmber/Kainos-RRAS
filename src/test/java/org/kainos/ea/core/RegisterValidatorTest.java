@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegisterValidatorTest {
-    RegisterValidator registerValidator = new RegisterValidator();
+    private final RegisterValidator registerValidator = new RegisterValidator();
 
     @Test
     @DisplayName("Test validate email with valid email")
     void validateEmail_withValidEmail_shouldReturnValid() {
-        RegisterValidator.ValidationResult result = registerValidator.validateEmail("Example@email.com");
+        RegisterValidator.ValidationResult result =
+                registerValidator.validateEmail("Example@email.com");
         assertEquals(RegisterValidator.ValidationResult.VALID, result);
     }
 

@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterValidator {
+    public static final int MIN_PASSWORD_LENGTH = 8;
+
     public enum ValidationResult {
         VALID,
         EMAIL_INCORRECT_FORMAT,
@@ -26,7 +28,7 @@ public class RegisterValidator {
     }
 
     public ValidationResult validatePassword(String password) {
-        if (password.length() < 8) {
+        if (password.length() < MIN_PASSWORD_LENGTH) {
             return ValidationResult.PASSWORD_TOO_SHORT;
         }
 

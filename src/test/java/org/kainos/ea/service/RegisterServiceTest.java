@@ -4,7 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.kainos.ea.api.RegisterService;
 import org.kainos.ea.cli.Login;
-import org.kainos.ea.client.*;
+import org.kainos.ea.client.InvalidRegisterException;
+import org.kainos.ea.client.RegisterEmailAlreadyExistsException;
 import org.kainos.ea.core.RegisterValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RegisterDao;
@@ -13,7 +14,8 @@ import org.mockito.Mockito;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RegisterServiceTest {
     private final RegisterDao registerDao = Mockito.mock(RegisterDao.class);;
@@ -45,7 +47,8 @@ public class RegisterServiceTest {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(registerDao.doesEmailExist(conn, login.getEmail())).thenReturn(true);
 
-        assertThrows(RegisterEmailAlreadyExistsException.class, () -> registerService.register(login));
+        assertThrows(RegisterEmailAlreadyExistsException.class,
+                () -> registerService.register(login));
     }
 
     @Test

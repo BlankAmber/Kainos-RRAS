@@ -19,8 +19,8 @@ import javax.ws.rs.core.Response;
 @Api("RRAS Register API")
 @Path("/api")
 public class RegisterController {
-    private final RegisterService registerService
-            = new RegisterService(new RegisterDao(), new DatabaseConnector(), new RegisterValidator());
+    private final RegisterService registerService = new RegisterService(
+            new RegisterDao(), new DatabaseConnector(), new RegisterValidator());
 
     @POST
     @Path("/register")
@@ -29,7 +29,7 @@ public class RegisterController {
         try {
             registerService.register(login);
             return Response.ok().build();
-        } catch(RegisterEmailAlreadyExistsException | InvalidRegisterException e) {
+        } catch (RegisterEmailAlreadyExistsException | InvalidRegisterException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (FailedToRegisterException e) {
             return Response.serverError().build();

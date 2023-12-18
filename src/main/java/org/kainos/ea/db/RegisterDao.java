@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RegisterDao {
+    public static final int PASSWORD_SALT_LENGTH = 12;
+
     public boolean doesEmailExist(Connection conn, String email) throws SQLException {
         String statement = "SELECT * FROM user WHERE email = ?";
         ResultSet resultSet = DaoUtil.executeStatement(conn, statement, true, email);
@@ -19,7 +21,9 @@ public class RegisterDao {
     public void register(Connection conn, Login login) throws SQLException {
         String statement = "INSERT INTO user (email, secured_password, role_id) VALUES (?,?,?)";
 
-        Hash hash = Password.hash(login.getPassword()).addRandomSalt(12).withArgon2();
+        Hash hash = Password.hash(login.getPassword())
+                .addRandomSalt(PASSWORD_SALT_LENGTH)
+                .withArgon2();
         String password = hash.getResult();
 
         DaoUtil.executeStatement(conn, statement, false,

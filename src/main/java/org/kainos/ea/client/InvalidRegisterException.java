@@ -3,7 +3,8 @@ package org.kainos.ea.client;
 import org.kainos.ea.core.RegisterValidator;
 
 public class InvalidRegisterException extends Exception {
-    public static String validationResultToErrorMessage(RegisterValidator.ValidationResult validationResult) {
+    public static String validationResultToErrorMessage(
+            RegisterValidator.ValidationResult validationResult) {
         switch (validationResult) {
             case EMAIL_INCORRECT_FORMAT:
                 return "Email is in an incorrect format";
@@ -15,8 +16,9 @@ public class InvalidRegisterException extends Exception {
                 return "Password must contain at least one lowercase character";
             case PASSWORD_NO_SYMBOLS:
                 return "Password must contain at least one symbol";
+            default:
+                return null;
         }
-        return null;
     }
 
     public InvalidRegisterException(RegisterValidator.ValidationResult validationResult) {

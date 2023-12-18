@@ -40,8 +40,7 @@ public class RegisterService {
             }
 
             throw new InvalidRegisterException(result);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
 
             throw new FailedToRegisterException();
