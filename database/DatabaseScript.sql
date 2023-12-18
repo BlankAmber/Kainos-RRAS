@@ -27,3 +27,7 @@ ALTER TABLE user
     DROP COLUMN salt;
 
 DROP TABLE IF EXISTS token;
+
+-- Remove case sensitivity as emails should be case in-sensitive
+ALTER TABLE user
+    MODIFY COLUMN email varchar(30) COLLATE utf8mb4_0900_ai_ci;

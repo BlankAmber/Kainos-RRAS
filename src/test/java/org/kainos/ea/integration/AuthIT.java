@@ -105,7 +105,7 @@ public class AuthIT {
 
     @Test
     @DisplayName("Test login invalid account info")
-    void postLogin_withInvalidAccountInfo_shouldReturnErrorBadRequestError() {
+    void postLogin_withInvalidAccountInfo_shouldReturnBadRequestError() {
         Login login = new Login(
                 "NotARealEmail",
                 "NotARealPassword"
