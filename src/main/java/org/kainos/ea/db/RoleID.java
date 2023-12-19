@@ -1,10 +1,16 @@
 package org.kainos.ea.db;
 
-public final class RoleID {
-    private RoleID() {
+public enum RoleID {
+    ADMIN(1),
+    EMPLOYEE(2);
 
+    private final int dbValue;
+
+    RoleID(int dbValue) {
+        this.dbValue = dbValue;
     }
 
-    public static final int ADMIN = 1;
-    public static final int EMPLOYEE = 2;
+    public int getDBValue() {
+        return this.dbValue;
+    }
 }

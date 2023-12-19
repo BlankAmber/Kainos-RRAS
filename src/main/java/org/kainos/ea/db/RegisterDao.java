@@ -27,6 +27,6 @@ public class RegisterDao {
         String password = hash.getResult();
 
         DaoUtil.executeStatement(conn, statement, false,
-                login.getEmail(), password, RoleID.EMPLOYEE);
+                login.getEmail(), password, RoleID.EMPLOYEE.getDBValue());
     }
 }

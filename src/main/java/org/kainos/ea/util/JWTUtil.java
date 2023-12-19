@@ -38,6 +38,6 @@ public final class JWTUtil {
             throw new JWTExpiredException();
         }
         int roleId = JWTUtil.getRoleIdFromDecodedJWT(decodedJWT);
-        return roleId == RoleID.EMPLOYEE || roleId == RoleID.ADMIN;
+        return roleId == RoleID.EMPLOYEE.getDBValue() || roleId == RoleID.ADMIN.getDBValue();
     }
 }
