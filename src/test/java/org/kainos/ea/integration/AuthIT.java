@@ -49,7 +49,7 @@ public class AuthIT {
             return;
         }
         assertEquals(email, decodedJWT.getSubject());
-        assertEquals(RoleID.ADMIN, JWTUtil.getRoleIdFromDecodedJWT(decodedJWT));
+        assertEquals(RoleID.ADMIN.getDBValue(), JWTUtil.getRoleIdFromDecodedJWT(decodedJWT));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class AuthIT {
             return;
         }
         assertEquals(email, decodedJWT.getSubject());
-        assertEquals(RoleID.EMPLOYEE, JWTUtil.getRoleIdFromDecodedJWT(decodedJWT));
+        assertEquals(RoleID.EMPLOYEE.getDBValue(), JWTUtil.getRoleIdFromDecodedJWT(decodedJWT));
     }
 
     @Test
