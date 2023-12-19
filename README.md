@@ -2,12 +2,13 @@
 
 Config
 ---
-1. The following environment variables need to be set to enable database connection:
+1. The following environment variables need to be set to run the backend:
 ```
 DB_USERNAME
 DB_PASSWORD
 DB_HOST
 DB_NAME
+JWT_SECRET
 ```
 2. If running integration tests, then the following environment variables need to be set:
 ```
