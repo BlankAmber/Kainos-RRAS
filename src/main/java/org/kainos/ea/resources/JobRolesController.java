@@ -9,10 +9,7 @@ import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 import org.kainos.ea.util.JWTUtil;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -25,8 +22,14 @@ public class JobRolesController {
     @GET
     @Path("/all-job-roles")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllJobRoles(@QueryParam("jwt") String jwt) {
+    public Response getAllJobRoles(@HeaderParam("Authorisation") String authHeader) {
         try {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Invalid or missing Authorisation header").build();
+            }
+
+            String jwt = authHeader.substring("Bearer ".length());
             if (!JWTUtil.isAtLeastEmployee(jwt)) {
                 return Response.status(Response.Status.FORBIDDEN).build();
             }
