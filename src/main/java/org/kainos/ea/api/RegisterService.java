@@ -1,6 +1,6 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.Login;
+import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.client.FailedToRegisterException;
 import org.kainos.ea.client.InvalidRegisterException;
 import org.kainos.ea.client.RegisterEmailAlreadyExistsException;
@@ -24,18 +24,18 @@ public class RegisterService {
         this.registerValidator = registerValidator;
     }
 
-    public void register(Login login)
+    public void register(RegisterDetails registerDetails)
             throws RegisterEmailAlreadyExistsException, InvalidRegisterException,
             FailedToRegisterException {
         try {
             Connection conn = databaseConnector.getConnection();
-            if (registerDao.doesEmailExist(conn, login.getEmail())) {
+            if (registerDao.doesEmailExist(conn, registerDetails.getEmail())) {
                 throw new RegisterEmailAlreadyExistsException();
             }
 
-            RegisterValidator.ValidationResult result = registerValidator.validateLogin(login);
+            RegisterValidator.ValidationResult result = registerValidator.validateRegisterDetails(registerDetails);
             if (result == RegisterValidator.ValidationResult.VALID) {
-                registerDao.register(conn, login);
+                registerDao.register(conn, registerDetails);
                 return;
             }
 

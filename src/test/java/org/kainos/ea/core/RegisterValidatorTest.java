@@ -67,4 +67,19 @@ public class RegisterValidatorTest {
         RegisterValidator.ValidationResult result = registerValidator.validatePassword("Password");
         assertEquals(RegisterValidator.ValidationResult.PASSWORD_NO_SYMBOLS, result);
     }
+
+    @Test
+    @DisplayName("Test validate role ID with invalid role IDs")
+    void validateRoleID_withNoSymbols_shouldReturnInvalidRoleID() {
+        int[] roleIds = {
+                0,
+                -1,
+                3,
+                4,
+        };
+        for (int id : roleIds) {
+            RegisterValidator.ValidationResult result = registerValidator.validateRoleId(id);
+            assertEquals(RegisterValidator.ValidationResult.INVALID_ROLE_ID, result);
+        }
+    }
 }

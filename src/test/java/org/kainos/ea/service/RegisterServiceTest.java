@@ -4,11 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.kainos.ea.api.RegisterService;
 import org.kainos.ea.cli.Login;
+import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.client.InvalidRegisterException;
 import org.kainos.ea.client.RegisterEmailAlreadyExistsException;
 import org.kainos.ea.core.RegisterValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RegisterDao;
+import org.kainos.ea.db.RoleID;
 import org.mockito.Mockito;
 
 import java.sql.Connection;
@@ -26,18 +28,19 @@ public class RegisterServiceTest {
     private final RegisterService registerService
             = new RegisterService(registerDao, databaseConnector, registerValidator);
 
-    private final Login login = new Login("AdminTest", "Password%");
+    private final RegisterDetails registerDetails = new RegisterDetails(
+            "AdminTest", "Password%", RoleID.ADMIN.getDBValue());
 
     @Test
     @DisplayName("Test valid register")
     void register_withValidDetails_shouldNotThrowAnException()
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(registerDao.doesEmailExist(conn, login.getEmail())).thenReturn(false);
-        Mockito.when(registerValidator.validateLogin(login))
+        Mockito.when(registerDao.doesEmailExist(conn, registerDetails.getEmail())).thenReturn(false);
+        Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
                 .thenReturn(RegisterValidator.ValidationResult.VALID);
 
-        assertDoesNotThrow(() -> registerService.register(login));
+        assertDoesNotThrow(() -> registerService.register(registerDetails));
     }
 
     @Test
@@ -45,10 +48,11 @@ public class RegisterServiceTest {
     void register_withDuplicateEmail_shouldThrowRegisterEmailAlreadyExistsException()
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(registerDao.doesEmailExist(conn, login.getEmail())).thenReturn(true);
+        Mockito.when(registerDao.doesEmailExist(conn, registerDetails.getEmail()))
+                .thenReturn(true);
 
         assertThrows(RegisterEmailAlreadyExistsException.class,
-                () -> registerService.register(login));
+                () -> registerService.register(registerDetails));
     }
 
     @Test
@@ -56,11 +60,12 @@ public class RegisterServiceTest {
     void register_withInvalidFormatEmail_shouldThrowInvalidRegisterException()
         throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(registerDao.doesEmailExist(conn, login.getEmail())).thenReturn(false);
-        Mockito.when(registerValidator.validateLogin(login))
+        Mockito.when(registerDao.doesEmailExist(conn, registerDetails.getEmail()))
+                .thenReturn(false);
+        Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
                 .thenReturn(RegisterValidator.ValidationResult.EMAIL_INCORRECT_FORMAT);
 
-        assertThrows(InvalidRegisterException.class, () -> registerService.register(login));
+        assertThrows(InvalidRegisterException.class, () -> registerService.register(registerDetails));
     }
 
     @Test
@@ -68,10 +73,24 @@ public class RegisterServiceTest {
     void register_withShortPassword_shouldThrowInvalidRegisterException()
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(registerDao.doesEmailExist(conn, login.getEmail())).thenReturn(false);
-        Mockito.when(registerValidator.validateLogin(login))
+        Mockito.when(registerDao.doesEmailExist(conn, registerDetails.getEmail()))
+                .thenReturn(false);
+        Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
                 .thenReturn(RegisterValidator.ValidationResult.PASSWORD_TOO_SHORT);
 
-        assertThrows(InvalidRegisterException.class, () -> registerService.register(login));
+        assertThrows(InvalidRegisterException.class, () -> registerService.register(registerDetails));
+    }
+
+    @Test
+    @DisplayName("Test register with invalid role ID")
+    void register_withInvalidRoleID_shouldThrowInvalidRegisterException()
+            throws SQLException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(registerDao.doesEmailExist(conn, registerDetails.getEmail()))
+                .thenReturn(false);
+        Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
+                .thenReturn(RegisterValidator.ValidationResult.INVALID_ROLE_ID);
+
+        assertThrows(InvalidRegisterException.class, () -> registerService.register(registerDetails));
     }
 }

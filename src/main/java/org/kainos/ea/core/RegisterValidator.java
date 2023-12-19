@@ -1,6 +1,8 @@
 package org.kainos.ea.core;
 
 import org.kainos.ea.cli.Login;
+import org.kainos.ea.cli.RegisterDetails;
+import org.kainos.ea.db.RoleID;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +16,8 @@ public class RegisterValidator {
         PASSWORD_TOO_SHORT,
         PASSWORD_NO_UPPERCASE_CHARACTERS,
         PASSWORD_NO_LOWERCASE_CHARACTERS,
-        PASSWORD_NO_SYMBOLS
+        PASSWORD_NO_SYMBOLS,
+        INVALID_ROLE_ID
     }
 
     public ValidationResult validateEmail(String email) {
@@ -48,11 +51,22 @@ public class RegisterValidator {
         return ValidationResult.VALID;
     }
 
-    public ValidationResult validateLogin(Login login) {
-        ValidationResult result = validateEmail(login.getEmail());
+    public ValidationResult validateRoleId(int roleId) {
+        if (roleId == RoleID.EMPLOYEE.getDBValue() || roleId == RoleID.ADMIN.getDBValue()) {
+            return ValidationResult.VALID;
+        }
+        return ValidationResult.INVALID_ROLE_ID;
+    }
+
+    public ValidationResult validateRegisterDetails(RegisterDetails registerDetails) {
+        ValidationResult result = validateEmail(registerDetails.getEmail());
         if (result != ValidationResult.VALID) {
             return result;
         }
-        return validatePassword(login.getPassword());
+        result = validateRoleId(registerDetails.getRoleId());
+        if (result != ValidationResult.VALID) {
+            return result;
+        }
+        return validatePassword(registerDetails.getPassword());
     }
 }
