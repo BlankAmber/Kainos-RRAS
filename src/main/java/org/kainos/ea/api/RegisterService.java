@@ -33,7 +33,8 @@ public class RegisterService {
                 throw new RegisterEmailAlreadyExistsException();
             }
 
-            RegisterValidator.ValidationResult result = registerValidator.validateRegisterDetails(registerDetails);
+            RegisterValidator.ValidationResult result =
+                    registerValidator.validateRegisterDetails(registerDetails);
             if (result == RegisterValidator.ValidationResult.VALID) {
                 registerDao.register(conn, registerDetails);
                 return;

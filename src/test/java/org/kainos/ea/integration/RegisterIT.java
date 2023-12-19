@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.DropwizardWebServiceApplication;
 import org.kainos.ea.DropwizardWebServiceConfiguration;
-import org.kainos.ea.cli.Login;
 import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.db.RoleID;
 

@@ -3,7 +3,6 @@ package org.kainos.ea.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.kainos.ea.api.RegisterService;
-import org.kainos.ea.cli.Login;
 import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.client.InvalidRegisterException;
 import org.kainos.ea.client.RegisterEmailAlreadyExistsException;
@@ -36,7 +35,8 @@ public class RegisterServiceTest {
     void register_withValidDetails_shouldNotThrowAnException()
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(registerDao.doesEmailExist(conn, registerDetails.getEmail())).thenReturn(false);
+        Mockito.when(registerDao.doesEmailExist(conn, registerDetails.getEmail()))
+                .thenReturn(false);
         Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
                 .thenReturn(RegisterValidator.ValidationResult.VALID);
 
@@ -65,7 +65,8 @@ public class RegisterServiceTest {
         Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
                 .thenReturn(RegisterValidator.ValidationResult.EMAIL_INCORRECT_FORMAT);
 
-        assertThrows(InvalidRegisterException.class, () -> registerService.register(registerDetails));
+        assertThrows(InvalidRegisterException.class,
+                () -> registerService.register(registerDetails));
     }
 
     @Test
@@ -78,7 +79,8 @@ public class RegisterServiceTest {
         Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
                 .thenReturn(RegisterValidator.ValidationResult.PASSWORD_TOO_SHORT);
 
-        assertThrows(InvalidRegisterException.class, () -> registerService.register(registerDetails));
+        assertThrows(InvalidRegisterException.class,
+                () -> registerService.register(registerDetails));
     }
 
     @Test
@@ -91,6 +93,7 @@ public class RegisterServiceTest {
         Mockito.when(registerValidator.validateRegisterDetails(registerDetails))
                 .thenReturn(RegisterValidator.ValidationResult.INVALID_ROLE_ID);
 
-        assertThrows(InvalidRegisterException.class, () -> registerService.register(registerDetails));
+        assertThrows(InvalidRegisterException.class,
+                () -> registerService.register(registerDetails));
     }
 }

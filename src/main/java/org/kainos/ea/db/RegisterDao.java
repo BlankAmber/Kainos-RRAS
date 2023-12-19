@@ -2,7 +2,6 @@ package org.kainos.ea.db;
 
 import com.password4j.Hash;
 import com.password4j.Password;
-import org.kainos.ea.cli.Login;
 import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.util.DaoUtil;
 

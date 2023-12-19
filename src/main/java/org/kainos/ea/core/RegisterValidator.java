@@ -1,6 +1,5 @@
 package org.kainos.ea.core;
 
-import org.kainos.ea.cli.Login;
 import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.db.RoleID;
 

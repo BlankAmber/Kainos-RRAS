@@ -3,7 +3,6 @@ package org.kainos.ea.resources;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.RegisterService;
-import org.kainos.ea.cli.Login;
 import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.client.FailedToRegisterException;
 import org.kainos.ea.client.InvalidRegisterException;
@@ -30,7 +29,8 @@ public class RegisterController {
     @POST
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response register(@HeaderParam("Authorisation") String authHeader, RegisterDetails registerDetails) {
+    public Response register(@HeaderParam("Authorisation") String authHeader,
+                             RegisterDetails registerDetails) {
         try {
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 return Response.status(Response.Status.BAD_REQUEST)
