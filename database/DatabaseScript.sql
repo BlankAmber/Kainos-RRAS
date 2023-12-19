@@ -4,10 +4,6 @@ CREATE DATABASE IF NOT EXISTS KainosJobs_AdamM;
 -- Use the database
 USE KainosJobs_AdamM;
 
-DROP TABLE IF EXISTS role;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS token;
-
 CREATE TABLE role (
     role_id int PRIMARY KEY AUTO_INCREMENT,
     role_name varchar(30) NOT NULL
@@ -26,3 +22,8 @@ CREATE TABLE token (
     token varchar(64) NOT NULL,
     expiry_date DATETIME NOT NULL
 );
+
+ALTER TABLE user
+    DROP COLUMN salt;
+
+DROP TABLE IF EXISTS token;

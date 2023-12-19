@@ -35,8 +35,8 @@ public class AuthServiceTest {
         String expectedToken = "token";
 
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(authDao.isValidLogin(login, conn)).thenReturn(true);
-        Mockito.when(authDao.generateToken(login.getEmail(), conn)).thenReturn(expectedToken);
+        Mockito.when(authDao.isValidLogin(conn, login)).thenReturn(true);
+        Mockito.when(authDao.generateJWT(conn, login.getEmail())).thenReturn(expectedToken);
 
         assertEquals(expectedToken, authService.login(login));
     }
@@ -46,7 +46,7 @@ public class AuthServiceTest {
     void login_whenDaoIsValidLoginReturnsFalse_shouldThrowFailedToLoginException()
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(authDao.isValidLogin(login, conn)).thenReturn(false);
+        Mockito.when(authDao.isValidLogin(conn, login)).thenReturn(false);
 
         assertThrows(FailedToLoginException.class,
                 () -> authService.login(login));
@@ -57,8 +57,8 @@ public class AuthServiceTest {
     void login_whenDaoGenerateTokenThrowsSQLException_shouldThrowFailedToGenerateTokenException()
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(authDao.isValidLogin(login, conn)).thenReturn(true);
-        Mockito.when(authDao.generateToken(login.getEmail(), conn))
+        Mockito.when(authDao.isValidLogin(conn, login)).thenReturn(true);
+        Mockito.when(authDao.generateJWT(conn, login.getEmail()))
                 .thenThrow(SQLException.class);
 
         assertThrows(FailedToGenerateTokenException.class, () -> authService.login(login));
@@ -69,7 +69,7 @@ public class AuthServiceTest {
     void login_whenDaoIsValidLoginThrowsSQLException_shouldThrowFailedToValidateLoginException()
             throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(authDao.isValidLogin(login, conn)).thenThrow(SQLException.class);
+        Mockito.when(authDao.isValidLogin(conn, login)).thenThrow(SQLException.class);
 
         assertThrows(FailedToValidateLoginException.class, () -> authService.login(login));
     }
