@@ -11,6 +11,7 @@ env:
   DB_USERNAME: ${{ secrets.DB_USERNAME }}
   DB_HOST: ${{ secrets.DB_HOST }}
   DB_NAME: ${{ secrets.DB_NAME }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
   TEST_ADMIN_ACCOUNT_EMAIL: ${{ secrets.TEST_ADMIN_ACCOUNT_EMAIL }}
   TEST_ADMIN_ACCOUNT_PASSWORD: ${{ secrets.TEST_ADMIN_ACCOUNT_PASSWORD }}
   TEST_EMPLOYEE_ACCOUNT_EMAIL: ${{ secrets.TEST_EMPLOYEE_ACCOUNT_EMAIL }}
@@ -41,4 +42,5 @@ jobs:
       run: mvn clean verify -DskipUnitTests
 
     - name: Run linter
+      if: always()
       run: mvn checkstyle:check

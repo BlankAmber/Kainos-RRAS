@@ -21,6 +21,11 @@ CREATE TABLE token (
     expiry_date DATETIME NOT NULL
 );
 
+ALTER TABLE user
+    DROP COLUMN salt;
+
+DROP TABLE IF EXISTS token;
+
 CREATE TABLE job_role (
 	job_role_id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
     job_role_name varchar(64) NOT NULL
