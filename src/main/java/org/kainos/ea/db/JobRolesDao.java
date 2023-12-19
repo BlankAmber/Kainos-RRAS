@@ -14,7 +14,7 @@ public class JobRolesDao {
         Statement statement = conn.createStatement();
 
         ResultSet resultSet = statement.executeQuery(
-                "SELECT job_role_id, job_role_name FROM job_roles");
+                "SELECT job_role_id, job_role_name FROM job_role");
 
         List<JobRole> jobRolesList = new ArrayList<>();
         while (resultSet.next()) {
