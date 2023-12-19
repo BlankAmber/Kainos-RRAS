@@ -22,7 +22,6 @@ public class InvalidRegisterException extends Exception {
     }
 
     public InvalidRegisterException(RegisterValidator.ValidationResult validationResult) {
-
         super(validationResultToErrorMessage(validationResult));
     }
 }
