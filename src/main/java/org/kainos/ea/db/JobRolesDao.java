@@ -16,7 +16,7 @@ public class JobRolesDao {
 
         Statement s = connection.createStatement();
 
-        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles");
+        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link, job_family_id FROM job_role");
 
         List<JobRole> jobRolesList = new ArrayList<>();
 
@@ -25,7 +25,8 @@ public class JobRolesDao {
                     rs.getInt("job_role_id"),
                     rs.getString("job_role_name"),
                     rs.getString("specification_summary"),
-                    rs.getString("sharepoint_link")
+                    rs.getString("sharepoint_link"),
+                    rs.getInt("job_family_id")
             );
 
             jobRolesList.add(jobRoles);
@@ -42,7 +43,7 @@ public class JobRolesDao {
 
         Statement s = connection.createStatement();
 
-        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles" +
+        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link, job_family_id FROM job_role" +
                 " where job_role_id = " + id);
 
         while (rs.next()) {
@@ -50,9 +51,36 @@ public class JobRolesDao {
                     rs.getInt("job_role_id"),
                     rs.getString("job_role_name"),
                     rs.getString("specification_summary"),
-                    rs.getString("sharepoint_link")
+                    rs.getString("sharepoint_link"),
+                    rs.getInt("job_family_id")
             );
         }
         return null;
+    }
+
+
+    public List<JobRole> getJobRolesByFamilyId(int id) throws SQLException {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
+
+        Statement s = connection.createStatement();
+
+        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link, job_family_id FROM job_role" +
+                " where job_family_id = " + id);
+
+        List<JobRole> jobRolesList = new ArrayList<>();
+
+        while (rs.next()) {
+            JobRole jobRoles = new JobRole(
+                    rs.getInt("job_role_id"),
+                    rs.getString("job_role_name"),
+                    rs.getString("specification_summary"),
+                    rs.getString("sharepoint_link"),
+                    rs.getInt("job_family_id")
+            );
+
+            jobRolesList.add(jobRoles);
+        }
+        return jobRolesList;
     }
 }

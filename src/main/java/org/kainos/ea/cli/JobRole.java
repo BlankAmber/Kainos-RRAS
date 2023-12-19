@@ -9,18 +9,23 @@ public class JobRole {
     private String jobRoleSpec;
     private String jobRoleLink;
 
+    private int jobFamilyId;
+
     public JobRole() {
         // Default constructor
     }
 
 
-    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink) {
+    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink, int jobFamilyId) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
         this.jobRoleSpec = jobRoleSpec;
         this.jobRoleLink = jobRoleLink;
+        this.jobFamilyId = jobFamilyId;
 
     }
+
+
 
     public int getJobRoleId() {
         return jobRoleId;
@@ -52,5 +57,13 @@ public class JobRole {
 
     public void setJobRoleLink(String jobRoleLink) {
         this.jobRoleLink = jobRoleLink;
+    }
+
+    public int getJobFamilyId() {
+        return jobFamilyId;
+    }
+
+    public void setJobFamilyId(int jobFamilyId) {
+        this.jobFamilyId = jobFamilyId;
     }
 }

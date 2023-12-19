@@ -52,4 +52,16 @@ public class JobRolesService {
 
     }
 
+    public List<JobRole> getJobRolesByFamilyId(int id)
+            throws FailedToGetAllJobRolesException, JobRoleDoesNotExistException, DatabaseConnectionException, SQLException {
+        List<JobRole> jobRolesList = null;
+        try {
+            jobRolesList = jobRolesDao.getJobRolesByFamilyId(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            throw new FailedToGetAllJobRolesException();
+        }
+        return jobRolesList;
+    }
+
 }
