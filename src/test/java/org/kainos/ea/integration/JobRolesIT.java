@@ -40,8 +40,9 @@ public class JobRolesIT {
                 .readEntity(String.class);
 
         List<JobRole> jobRolesList = APP.client()
-                .target("http://localhost:8080/api/all-job-roles?jwt=" + jwt)
+                .target("http://localhost:8080/api/all-job-roles")
                 .request()
+                .header("Authorisation", "Bearer " + jwt)
                 .get(List.class);
 
         assertFalse(jobRolesList.isEmpty());
