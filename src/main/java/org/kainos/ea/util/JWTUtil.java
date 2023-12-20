@@ -40,4 +40,14 @@ public final class JWTUtil {
         int roleId = JWTUtil.getRoleIdFromDecodedJWT(decodedJWT);
         return roleId == RoleID.EMPLOYEE.getDBValue() || roleId == RoleID.ADMIN.getDBValue();
     }
+
+    public static boolean isAdmin(String jwt)
+            throws JWTVerificationException, JWTExpiredException {
+        DecodedJWT decodedJWT = JWTUtil.decodeJWT(jwt);
+        if (JWTUtil.isDecodedJWTExpired(decodedJWT)) {
+            throw new JWTExpiredException();
+        }
+        int roleId = JWTUtil.getRoleIdFromDecodedJWT(decodedJWT);
+        return roleId == RoleID.ADMIN.getDBValue();
+    }
 }

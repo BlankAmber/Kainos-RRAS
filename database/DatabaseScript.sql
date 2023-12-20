@@ -30,3 +30,7 @@ CREATE TABLE job_role (
 	job_role_id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
     job_role_name varchar(64) NOT NULL
 );
+
+-- Remove case sensitivity as emails should be case in-sensitive
+ALTER TABLE user
+    MODIFY COLUMN email varchar(30) COLLATE utf8mb4_0900_ai_ci;
