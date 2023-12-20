@@ -1,27 +1,18 @@
 package org.kainos.ea.cli;
 
-
-public class JobRole {
+public class JobFamilyGroup {
 
     private int jobRoleId;
     private String jobRoleName;
 
-    private String jobRoleSpec;
-    private String jobRoleLink;
-
     private String jobFamilyGroupName;
 
-    public JobRole() {
-        // Default constructor
-    }
 
-    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink) {
+    public JobFamilyGroup(int jobRoleId, String jobRoleName, String jobFamilyGroupName) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
-        this.jobRoleSpec = jobRoleSpec;
-        this.jobRoleLink = jobRoleLink;
+        this.jobFamilyGroupName = jobFamilyGroupName;
     }
-
 
     public int getJobRoleId() {
         return jobRoleId;
@@ -38,23 +29,6 @@ public class JobRole {
     public void setJobRoleName(String jobRoleName) {
         this.jobRoleName = jobRoleName;
     }
-
-    public String getJobRoleSpec() {
-        return jobRoleSpec;
-    }
-
-    public void setJobRoleSpec(String jobRoleSpec) {
-        this.jobRoleSpec = jobRoleSpec;
-    }
-
-    public String getJobRoleLink() {
-        return jobRoleLink;
-    }
-
-    public void setJobRoleLink(String jobRoleLink) {
-        this.jobRoleLink = jobRoleLink;
-    }
-
 
     public String getJobFamilyGroupName() {
         return jobFamilyGroupName;

@@ -3,6 +3,7 @@ package org.kainos.ea.db.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.kainos.ea.cli.JobFamilyGroup;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.client.DatabaseConnectionException;
@@ -37,11 +38,12 @@ public class JobRolesServiceTest {
     @DisplayName("Test returning job roles")
     void getJobRoles_shouldReturnJobRoles_whenDaoReturnsJobRoles() throws SQLException, FailedToGetAllJobRolesException {
 
-        List<JobRole> ListOfJobRoles = Arrays.asList(
-                Mockito.mock(JobRole.class),
-                Mockito.mock(JobRole.class),
-                Mockito.mock(JobRole.class),
-                Mockito.mock(JobRole.class)
+        List<JobFamilyGroup> ListOfJobRoles = Arrays.asList(
+                Mockito.mock(JobFamilyGroup.class),
+                Mockito.mock(JobFamilyGroup.class),
+                Mockito.mock(JobFamilyGroup.class),
+                Mockito.mock(JobFamilyGroup.class)
+
         );
 
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);

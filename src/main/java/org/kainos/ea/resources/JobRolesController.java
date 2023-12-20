@@ -57,18 +57,5 @@ public class JobRolesController {
         }
     }
 
-    @GET
-    @Path("/job-roles-by-family-id/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getJobRolesByFamilyId(@PathParam("id") int jobFamilyId) {
-        try {
-            return Response.status(HttpStatus.OK_200)
-                    .entity(jobRolesService.getJobRolesByFamilyId(jobFamilyId)).build();
-        } catch (SQLException | DatabaseConnectionException
-                 | JobRoleDoesNotExistException
-                 | FailedToGetAllJobRolesException e)  {
-            System.out.println(e);
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
-        }
-    }
+
 }
