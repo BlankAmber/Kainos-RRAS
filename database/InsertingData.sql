@@ -570,3 +570,103 @@ WHERE job_role_id BETWEEN 76 AND 79;
 UPDATE job_role
 SET job_family_id = 18
 WHERE job_role_id BETWEEN 80 AND 84;
+
+-- Insert statements for management_levels table
+INSERT INTO management_level (management_level_name) VALUES
+	('Leadership Community'),
+	('Principal'),
+	('Manager'),
+	('Consultant'),
+	('Senior Associate'),
+	('Associate'),
+	('Trainee'),
+	('Apprentice');
+
+
+
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 1;
+UPDATE job_role SET management_level_id = 1 WHERE job_role_id = 2;
+UPDATE job_role SET management_level_id = 8 WHERE job_role_id = 3;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 4;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 5;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 6;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 7;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 8;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 9;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 10;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 11;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 12;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 13;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 14;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 15;
+UPDATE job_role SET management_level_id = 2 WHERE job_role_id = 16;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 17;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 18;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 19;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 20;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 21;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 22;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 23;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 24;
+UPDATE job_role SET management_level_id = 2 WHERE job_role_id = 25;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 26;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 27;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 28;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 29;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 30;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 31;
+UPDATE job_role SET management_level_id = 2 WHERE job_role_id = 32;
+
+UPDATE job_role SET management_level_id = 1 WHERE job_role_id = 33;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 34;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 35;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 36;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 37;
+UPDATE job_role SET management_level_id = 2 WHERE job_role_id = 38;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 39;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 40;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 41;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 42;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 43;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 44;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 45;
+UPDATE job_role SET management_level_id = 2 WHERE job_role_id = 46;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 47;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 48;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 49;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 50;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 51;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 52;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 53;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 54;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 55;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 56;
+
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 57;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 58;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 59;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 60;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 61;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 62;
+UPDATE job_role SET management_level_id = 2 WHERE job_role_id = 63;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 64;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 65;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 66;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 67;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 68;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 69;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 70;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 71;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 72;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 73;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 74;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 75;
+UPDATE job_role SET management_level_id = 2 WHERE job_role_id = 76;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 77;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 78;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 79;
+UPDATE job_role SET management_level_id = 3 WHERE job_role_id = 80;
+UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 81;
+UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 82;
+UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 83;
+UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 84;

@@ -59,8 +59,14 @@ CREATE TABLE job_family (
     FOREIGN KEY (job_family_group_id) REFERENCES job_family_group(job_family_group_id)
 );
 
-SELECT j.job_role_id, j.job_role_name, jfg.job_family_group_name
-FROM job_role j
-JOIN job_family jf ON j.job_family_id = jf.job_family_id
-JOIN job_family_group jfg ON jf.job_family_group_id = jfg.job_family_group_id;
+ CREATE TABLE management_level (
+    management_level_id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    management_level_name varchar(64) NOT NULL
+);
+
+ALTER TABLE job_role
+ADD COLUMN management_level_id int,
+ADD CONSTRAINT fk_job_role_management_level
+FOREIGN KEY (management_level_id) REFERENCES management_level(management_level_id);
+
 
