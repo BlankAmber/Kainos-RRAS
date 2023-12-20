@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.DropwizardWebServiceConfiguration;
 import org.kainos.ea.DropwizardWebServiceApplication;
+import org.kainos.ea.cli.JobBandLevel;
 import org.kainos.ea.cli.JobFamilyGroup;
 import org.kainos.ea.cli.JobRole;
 
@@ -27,7 +28,7 @@ public class JobRolesIntegrationTest {
     @Test
     @DisplayName("Integration test for returning job roles")
     void getJobRoles_shouldReturnListOfJobRoles() {
-        List<JobFamilyGroup> response = APP.client().target("http://localhost:8080/api/all-job-roles")
+        List<JobBandLevel> response = APP.client().target("http://localhost:8080/api/all-job-roles")
                 .request()
                 .get(List.class);
 

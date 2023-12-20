@@ -1,5 +1,6 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.JobBandLevel;
 import org.kainos.ea.cli.JobFamilyGroup;
 import org.kainos.ea.cli.JobRole;
 
@@ -23,8 +24,8 @@ public class JobRolesService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<JobFamilyGroup> getAllJobRoles() throws FailedToGetAllJobRolesException {
-        List<JobFamilyGroup> jobRolesList = null;
+    public List<JobBandLevel> getAllJobRoles() throws FailedToGetAllJobRolesException {
+        List<JobBandLevel> jobRolesList = null;
         try {
             jobRolesList = jobRolesDao.getAllJobRoles(databaseConnector.getConnection());
         } catch (SQLException e) {
