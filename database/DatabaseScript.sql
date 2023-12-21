@@ -69,4 +69,5 @@ ADD COLUMN management_level_id int,
 ADD CONSTRAINT fk_job_role_management_level
 FOREIGN KEY (management_level_id) REFERENCES management_level(management_level_id);
 
-
+ALTER TABLE job_role
+ADD COLUMN responsibilities VARCHAR(4000);
