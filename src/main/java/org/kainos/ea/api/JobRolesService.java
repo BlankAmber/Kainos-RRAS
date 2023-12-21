@@ -1,13 +1,8 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.JobBandLevel;
-import org.kainos.ea.cli.JobFamilyGroup;
-import org.kainos.ea.cli.JobResponsibilities;
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.*;
 
-import org.kainos.ea.client.DatabaseConnectionException;
-import org.kainos.ea.client.FailedToGetAllJobRolesException;
-import org.kainos.ea.client.JobRoleDoesNotExistException;
+import org.kainos.ea.client.*;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 
@@ -55,6 +50,29 @@ public class JobRolesService {
 
     }
 
+    public int createJobRole(JobRoleRequest jobRoleRequest)
+            throws FailedToCreateJobRoleException, InvalidJobRoleException {
+        try {
+            String validation = jobRoleValidator.isValidJobsalesEmployeeRequest);
+
+            if (validation != null) {
+                throw new InvalidJobRoleException(validation);
+            }
+
+            int id = jobRolesDao.createJobRole(jobRoleRequest);
+
+            if (id == -1) {
+                throw new FailedToCreateJobRoleException();
+            }
+
+            return id;
+        }
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToCreateJobRoleException();
+        }
+    }
 
 
 }

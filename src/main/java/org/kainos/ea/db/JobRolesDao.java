@@ -1,14 +1,8 @@
 package org.kainos.ea.db;
 
-import org.kainos.ea.cli.JobBandLevel;
-import org.kainos.ea.cli.JobFamilyGroup;
-import org.kainos.ea.cli.JobResponsibilities;
-import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,5 +57,31 @@ public class JobRolesDao {
         }
         return null;
     }
+
+    public int createJobRole(JobRoleRequest jobRoleRequest) throws SQLException {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
+
+        String insertStatement = "INSERT INTO job_role (job_role_name, job_family_id, management_level_id, specification_summary, sharepoint_link, responsibilities) VALUES (?,?,?,?,?,?)";
+
+        PreparedStatement s = connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+
+        s.setString(1, jobRoleRequest.getJobRoleName());
+        s.setInt(2, jobRoleRequest.getJobFamilyGroupId());
+        s.setInt(3, jobRoleRequest.getJobBandLevelId());
+        s.setString(4, jobRoleRequest.getJobRoleSpec());
+        s.setString(5, jobRoleRequest.getJobRoleSpec());
+        s.setString(6, jobRoleRequest.getJobResponsibilities());
+
+        s.executeUpdate();
+
+        ResultSet rs = s.getGeneratedKeys();
+
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return -1;
+    }
+
 
 }
