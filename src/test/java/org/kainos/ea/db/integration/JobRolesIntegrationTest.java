@@ -11,6 +11,7 @@ import org.kainos.ea.DropwizardWebServiceConfiguration;
 import org.kainos.ea.DropwizardWebServiceApplication;
 import org.kainos.ea.cli.JobBandLevel;
 import org.kainos.ea.cli.JobFamilyGroup;
+import org.kainos.ea.cli.JobResponsibilities;
 import org.kainos.ea.cli.JobRole;
 
 import javax.ws.rs.core.Response;
@@ -28,7 +29,7 @@ public class JobRolesIntegrationTest {
     @Test
     @DisplayName("Integration test for returning job roles")
     void getJobRoles_shouldReturnListOfJobRoles() {
-        List<JobBandLevel> response = APP.client().target("http://localhost:8080/api/all-job-roles")
+        List<JobResponsibilities> response = APP.client().target("http://localhost:8080/api/all-job-roles")
                 .request()
                 .get(List.class);
 
