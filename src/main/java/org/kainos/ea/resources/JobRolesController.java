@@ -10,6 +10,7 @@ import org.kainos.ea.client.JWTExpiredException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
+import org.kainos.ea.util.ControllerUtil;
 import org.kainos.ea.util.JWTUtil;
 
 import javax.ws.rs.*;
@@ -26,20 +27,9 @@ public class JobRolesController {
     @Path("/all-job-roles")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJobRoles(@HeaderParam("Authorisation") String authHeader) {
-        try {
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                return Response.status(Response.Status.BAD_REQUEST)
-                        .entity("Invalid or missing Authorisation header").build();
-            }
-
-            String jwt = authHeader.substring("Bearer ".length());
-            if (!JWTUtil.isAtLeastEmployee(jwt)) {
-                return Response.status(Response.Status.FORBIDDEN).build();
-            }
-        } catch (JWTExpiredException e) {
-            return Response.status(Response.Status.FORBIDDEN).entity(e.getMessage()).build();
-        } catch (JWTVerificationException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        Response response = ControllerUtil.validAuthHeaderAtLeastEmployee(authHeader);
+        if (response != null) {
+            return response;
         }
 
         try {
@@ -55,20 +45,9 @@ public class JobRolesController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJobRolesById(@HeaderParam("Authorisation") String authHeader,
                                     @PathParam("id") int jobRoleId) {
-        try {
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                return Response.status(Response.Status.BAD_REQUEST)
-                        .entity("Invalid or missing Authorisation header").build();
-            }
-
-            String jwt = authHeader.substring("Bearer ".length());
-            if (!JWTUtil.isAtLeastEmployee(jwt)) {
-                return Response.status(Response.Status.FORBIDDEN).build();
-            }
-        } catch (JWTExpiredException e) {
-            return Response.status(Response.Status.FORBIDDEN).entity(e.getMessage()).build();
-        } catch (JWTVerificationException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        Response response = ControllerUtil.validAuthHeaderAtLeastEmployee(authHeader);
+        if (response != null) {
+            return response;
         }
 
         try {

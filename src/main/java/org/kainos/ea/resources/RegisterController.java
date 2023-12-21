@@ -11,6 +11,7 @@ import org.kainos.ea.client.RegisterEmailAlreadyExistsException;
 import org.kainos.ea.core.RegisterValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RegisterDao;
+import org.kainos.ea.util.ControllerUtil;
 import org.kainos.ea.util.JWTUtil;
 
 import javax.ws.rs.HeaderParam;
@@ -31,20 +32,9 @@ public class RegisterController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(@HeaderParam("Authorisation") String authHeader,
                              RegisterDetails registerDetails) {
-        try {
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                return Response.status(Response.Status.BAD_REQUEST)
-                        .entity("Invalid or missing Authorisation header").build();
-            }
-
-            String jwt = authHeader.substring("Bearer ".length());
-            if (!JWTUtil.isAdmin(jwt)) {
-                return Response.status(Response.Status.FORBIDDEN).build();
-            }
-        } catch (JWTExpiredException e) {
-            return Response.status(Response.Status.FORBIDDEN).entity(e.getMessage()).build();
-        } catch (JWTVerificationException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        Response response = ControllerUtil.validAuthHeaderIsAdmin(authHeader);
+        if (response != null) {
+            return response;
         }
 
         try {
