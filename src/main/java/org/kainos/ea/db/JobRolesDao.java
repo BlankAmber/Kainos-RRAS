@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRolesDao {
-    public List<JobRole> getAllJobRoles(Connection c) throws SQLException {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-        Connection connection = databaseConnector.getConnection();
+    public List<JobRole> getAllJobRoles(Connection conn) throws SQLException {
+        Statement statement = conn.createStatement();
 
-        Statement s = connection.createStatement();
-
-        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles");
+        ResultSet resultSet = statement.executeQuery(
+                "SELECT job_role_id, job_role_name, " +
+                    "specification_summary, sharepoint_link " +
+                    "FROM job_roles");
 
         List<JobRole> jobRolesList = new ArrayList<>();
 
-        while (rs.next()) {
+        while (resultSet.next()) {
             JobRole jobRoles = new JobRole(
-                    rs.getInt("job_role_id"),
-                    rs.getString("job_role_name"),
-                    rs.getString("specification_summary"),
-                    rs.getString("sharepoint_link")
+                    resultSet.getInt("job_role_id"),
+                    resultSet.getString("job_role_name"),
+                    resultSet.getString("specification_summary"),
+                    resultSet.getString("sharepoint_link")
             );
 
             jobRolesList.add(jobRoles);
@@ -33,24 +33,18 @@ public class JobRolesDao {
         return jobRolesList;
     }
 
+    public JobRole getJobRolesById(Connection conn, int id) throws SQLException {
+        Statement statement = conn.createStatement();
 
-
-    public JobRole getJobRolesById(int id) throws SQLException {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-        Connection connection = databaseConnector.getConnection();
-
-
-        Statement s = connection.createStatement();
-
-        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles" +
+        ResultSet resultSet = statement.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles" +
                 " where job_role_id = " + id);
 
-        while (rs.next()) {
+        if (resultSet.next()) {
             return new JobRole(
-                    rs.getInt("job_role_id"),
-                    rs.getString("job_role_name"),
-                    rs.getString("specification_summary"),
-                    rs.getString("sharepoint_link")
+                    resultSet.getInt("job_role_id"),
+                    resultSet.getString("job_role_name"),
+                    resultSet.getString("specification_summary"),
+                    resultSet.getString("sharepoint_link")
             );
         }
         return null;

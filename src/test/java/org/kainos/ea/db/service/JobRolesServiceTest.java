@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.api.JobRolesService;
-import org.kainos.ea.client.DatabaseConnectionException;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
 import org.kainos.ea.db.DatabaseConnector;

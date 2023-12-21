@@ -1,70 +1,53 @@
 package org.kainos.ea.db;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.password4j.Password;
 import org.apache.commons.lang3.time.DateUtils;
-import org.kainos.ea.Util;
 import org.kainos.ea.cli.Login;
+import org.kainos.ea.util.DaoUtil;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
+import java.sql.SQLException;
 import java.util.Date;
-import java.util.UUID;
 
 public class AuthDao {
     private static final int TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN = 8;
 
-    public boolean isValidLogin(Login login) {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-        try (Connection conn = databaseConnector.getConnection()) {
-            Statement statement = conn.createStatement();
+    public boolean isValidLogin(Connection conn, Login login) throws SQLException {
+        String statement = "SELECT secured_password FROM user WHERE email = ?";
+        ResultSet resultSet =
+                DaoUtil.executeStatement(conn, statement, true, login.getEmail());
 
-            ResultSet resultSet = statement.executeQuery(
-                    "SELECT salt, secured_password FROM user WHERE username = "
-                    + "'" + login.getUsername() + "'");
-
-            if (resultSet.next()) {
-                String salt = resultSet.getString("salt");
-                String saltedPassword = login.getPassword() + salt;
-
-                MessageDigest messageDigest = null;
-                try {
-                    messageDigest = MessageDigest.getInstance("SHA-256");
-                } catch (NoSuchAlgorithmException e) {
-                    System.err.println("Algorithm not found!");
-                }
-
-                byte[] encodedHash = messageDigest.digest(saltedPassword.getBytes());
-                String securedPassword = String.format("%064x", new BigInteger(1, encodedHash));
-
-                return resultSet.getString("secured_password").equals(securedPassword);
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
+        if (resultSet.next()) {
+            String securedPassword = resultSet.getString("secured_password");
+            return Password.check(login.getPassword(), securedPassword).withArgon2();
         }
 
         return false;
     }
 
-    public String generateToken(String username) throws SQLException {
-        String token = UUID.randomUUID().toString();
+    public String generateJWT(Connection conn, String email) throws SQLException {
+        String statement = "SELECT role_id FROM user WHERE email = ?";
+        ResultSet resultSet = DaoUtil.executeStatement(conn, statement, true, email);
+
+        int roleId;
+        if (resultSet.next()) {
+            roleId = resultSet.getInt("role_id");
+        } else {
+            return null;
+        }
+
         // TODO: Test this with different timezones
         Date expiryDate = DateUtils.addHours(new Date(), TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN);
-        DatabaseConnector databaseConnector = new DatabaseConnector();
 
-        Connection c = databaseConnector.getConnection();
-
-        String insertStatement = "INSERT INTO token (username, token, expiry_date) VALUES (?,?,?)";
-
-        PreparedStatement statement = c.prepareStatement(insertStatement);
-        Util.setValues(statement, username, token, new Timestamp(expiryDate.getTime()));
-        statement.executeUpdate();
-
-        return token;
+        Algorithm algorithm = Algorithm.HMAC256(System.getenv("JWT_SECRET"));
+        return JWT.create()
+                .withIssuer("auth0")
+                .withSubject(email)
+                .withExpiresAt(expiryDate)
+                .withClaim("role_id", roleId)
+                .sign(algorithm);
     }
 }
