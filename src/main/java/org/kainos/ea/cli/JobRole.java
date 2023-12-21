@@ -1,41 +1,24 @@
 package org.kainos.ea.cli;
 
-<<<<<<< HEAD
-
-public class JobRole {
-
-    private int jobRoleId;
-    private String jobRoleName;
-
-    private String jobRoleSpec;
-    private String jobRoleLink;
-
-    public JobRole() {
-        // Default constructor
-    }
-
-
-    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink) {
-        this.jobRoleId = jobRoleId;
-        this.jobRoleName = jobRoleName;
-        this.jobRoleSpec = jobRoleSpec;
-        this.jobRoleLink = jobRoleLink;
-
-=======
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobRole {
     private int jobRoleId;
     private String jobRoleName;
+    private String jobRoleSpec;
+    private String jobRoleLink;
 
     @JsonCreator
     public JobRole(
             @JsonProperty("jobRoleId") int jobRoleId,
-            @JsonProperty("jobRoleName") String jobRoleName) {
+            @JsonProperty("jobRoleName") String jobRoleName,
+            @JsonProperty("jobRoleSpec") String jobRoleSpec,
+            @JsonProperty("jobRoleLink") String jobRoleLink) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
->>>>>>> ready-for-signoff
+        this.jobRoleSpec = jobRoleSpec;
+        this.jobRoleLink = jobRoleLink;
     }
 
     public int getJobRoleId() {
@@ -53,7 +36,6 @@ public class JobRole {
     public void setJobRoleName(String jobRoleName) {
         this.jobRoleName = jobRoleName;
     }
-<<<<<<< HEAD
 
     public String getJobRoleSpec() {
         return jobRoleSpec;
@@ -70,6 +52,4 @@ public class JobRole {
     public void setJobRoleLink(String jobRoleLink) {
         this.jobRoleLink = jobRoleLink;
     }
-=======
->>>>>>> ready-for-signoff
 }

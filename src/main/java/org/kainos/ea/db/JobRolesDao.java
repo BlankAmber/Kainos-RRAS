@@ -16,7 +16,7 @@ public class JobRolesDao {
         ResultSet resultSet = statement.executeQuery(
                 "SELECT job_role_id, job_role_name, " +
                     "specification_summary, sharepoint_link " +
-                    "FROM job_roles");
+                    "FROM job_role");
 
         List<JobRole> jobRolesList = new ArrayList<>();
 
@@ -36,7 +36,9 @@ public class JobRolesDao {
     public JobRole getJobRolesById(Connection conn, int id) throws SQLException {
         Statement statement = conn.createStatement();
 
-        ResultSet resultSet = statement.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_roles" +
+        ResultSet resultSet = statement.executeQuery(
+                "SELECT job_role_id, job_role_name, " +
+                "specification_summary, sharepoint_link FROM job_role" +
                 " where job_role_id = " + id);
 
         if (resultSet.next()) {
