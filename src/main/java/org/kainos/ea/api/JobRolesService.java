@@ -5,7 +5,7 @@ import org.kainos.ea.cli.*;
 import org.kainos.ea.client.*;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
-
+import org.kainos.ea.core.JobRoleValidator;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,6 +14,7 @@ public class JobRolesService {
     public JobRolesDao jobRolesDao;
 
     public DatabaseConnector databaseConnector;
+    JobRoleValidator jobRoleValidator = new JobRoleValidator();
 
     public JobRolesService(JobRolesDao jobRolesDao, DatabaseConnector databaseConnector) {
         this.jobRolesDao = jobRolesDao;
@@ -53,7 +54,7 @@ public class JobRolesService {
     public int createJobRole(JobRoleRequest jobRoleRequest)
             throws FailedToCreateJobRoleException, InvalidJobRoleException {
         try {
-            String validation = jobRoleValidator.isValidJobsalesEmployeeRequest);
+            String validation = jobRoleValidator.isValidJobRole(jobRoleRequest);
 
             if (validation != null) {
                 throw new InvalidJobRoleException(validation);
