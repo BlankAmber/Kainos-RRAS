@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
+import org.kainos.ea.client.FailedToGetJobRoleException;
+import org.kainos.ea.client.JobRoleDoesNotExistException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 import org.mockito.Mockito;
@@ -54,5 +56,16 @@ public class JobRolesServiceTest {
         Mockito.when(jobRolesDao.getAllJobRoles(conn)).thenThrow(SQLException.class);
 
         assertThrows(FailedToGetAllJobRolesException.class, jobRolesService::getAllJobRoles);
+    }
+
+    @Test
+    @DisplayName("Test for returning individual job roles")
+    void getJobRole_whenDaoReturnsId_shouldReturnId()
+            throws SQLException, JobRoleDoesNotExistException, FailedToGetJobRoleException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        JobRole jobRole = Mockito.mock(JobRole.class);
+        Mockito.when(jobRolesDao.getJobRolesById(conn, 1)).thenReturn(jobRole);
+
+        assertEquals(jobRole, jobRolesService.getJobRolesById(1));
     }
 }

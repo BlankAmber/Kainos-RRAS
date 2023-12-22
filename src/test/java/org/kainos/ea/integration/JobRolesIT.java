@@ -3,6 +3,7 @@ package org.kainos.ea.integration;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +34,6 @@ public class JobRolesIT {
         String email = System.getenv("TEST_EMPLOYEE_ACCOUNT_EMAIL");
         String password = System.getenv("TEST_EMPLOYEE_ACCOUNT_PASSWORD");
         Login login = new Login(email, password);
-
         String jwt = APP.client().target("http://localhost:8080/api/login")
                 .request()
                 .post(Entity.entity(login, MediaType.APPLICATION_JSON_TYPE))
@@ -49,13 +49,34 @@ public class JobRolesIT {
     }
 
     @Test
-    @DisplayName("Test GET /all-job-roles with invalid jwt returns error 400")
-    void getJobRoles_withInvalidJWT_shouldReturn() {
+    @DisplayName("Test GET /all-job-roles with no jwt returns error 400")
+    void getJobRoles_withNoJWT_shouldReturnError400() {
         int statusCode = APP.client()
-                .target("http://localhost:8080/api/all-job-roles?jwt=fakejwt")
+                .target("http://localhost:8080/api/all-job-roles")
                 .request()
                 .get()
                 .getStatus();
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), statusCode);
+    }
+
+    @Test
+    @DisplayName("Integration test for returning individual job roles")
+    void getJobRoles_withId_shouldReturnJobRole() {
+        String email = System.getenv("TEST_EMPLOYEE_ACCOUNT_EMAIL");
+        String password = System.getenv("TEST_EMPLOYEE_ACCOUNT_PASSWORD");
+        Login login = new Login(email, password);
+        String jwt = APP.client().target("http://localhost:8080/api/login")
+                .request()
+                .post(Entity.entity(login, MediaType.APPLICATION_JSON_TYPE))
+                .readEntity(String.class);
+
+        Response response =
+                APP.client().target("http://localhost:8080/api/all-job-roles/1")
+                        .request()
+                        .header("Authorisation", "Bearer " + jwt)
+                        .get();
+
+        Assertions.assertEquals(200, response.getStatus());
+        Assertions.assertEquals(1, response.readEntity(JobRole.class).getJobRoleId());
     }
 }
