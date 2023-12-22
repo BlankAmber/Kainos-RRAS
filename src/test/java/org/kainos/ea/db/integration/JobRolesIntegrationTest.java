@@ -16,17 +16,16 @@ import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class JobRolesIntegrationTest {
-
     static final DropwizardAppExtension<DropwizardWebServiceConfiguration> APP = new DropwizardAppExtension<>(
             DropwizardWebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
 
-
     @Test
     @DisplayName("Integration test for returning job roles")
     void getJobRoles_shouldReturnListOfJobRoles() {
-        List<JobRole> response = APP.client().target("http://localhost:8080/api/all-job-roles")
+        List<JobRole> response =
+                APP.client().target("http://localhost:8080/api/all-job-roles")
                 .request()
                 .get(List.class);
 
@@ -35,12 +34,13 @@ public class JobRolesIntegrationTest {
 
     @Test
     @DisplayName("Integration test for returning individual job roles")
-    void getJobRoles_shouldReturnJobRole() {
-        Response response = APP.client().target("http://localhost:8080/api/all-job-roles/1")
+    void getJobRoles_withId_shouldReturnJobRole() {
+        Response response =
+                APP.client().target("http://localhost:8080/api/all-job-roles/1")
                 .request()
                 .get();
 
-        Assertions.assertEquals(200,response.getStatus());
+        Assertions.assertEquals(200, response.getStatus());
         Assertions.assertEquals(1, response.readEntity(JobRole.class).getJobRoleId());
     }
 }

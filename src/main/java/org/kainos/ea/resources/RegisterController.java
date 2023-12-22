@@ -1,18 +1,15 @@
 package org.kainos.ea.resources;
 
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.RegisterService;
 import org.kainos.ea.cli.RegisterDetails;
 import org.kainos.ea.client.FailedToRegisterException;
 import org.kainos.ea.client.InvalidRegisterException;
-import org.kainos.ea.client.JWTExpiredException;
 import org.kainos.ea.client.RegisterEmailAlreadyExistsException;
 import org.kainos.ea.core.RegisterValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.RegisterDao;
 import org.kainos.ea.util.ControllerUtil;
-import org.kainos.ea.util.JWTUtil;
 
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;

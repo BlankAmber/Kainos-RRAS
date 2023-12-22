@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
+import org.kainos.ea.client.FailedToGetJobRoleException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
@@ -23,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class JobRolesServiceTest {
-
-
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
 
     JobRolesDao jobRolesDao = Mockito.mock(JobRolesDao.class);
@@ -34,8 +33,8 @@ public class JobRolesServiceTest {
 
     @Test
     @DisplayName("Test returning job roles")
-    void getJobRoles_shouldReturnJobRoles_whenDaoReturnsJobRoles() throws SQLException, FailedToGetAllJobRolesException {
-
+    void getJobRoles_shouldReturnJobRoles_whenDaoReturnsJobRoles()
+            throws SQLException, FailedToGetAllJobRolesException {
         List<JobRole> ListOfJobRoles = Arrays.asList(
                 Mockito.mock(JobRole.class),
                 Mockito.mock(JobRole.class),
@@ -47,17 +46,15 @@ public class JobRolesServiceTest {
         Mockito.when(jobRolesDao.getAllJobRoles(conn)).thenReturn(ListOfJobRoles);
 
         assertEquals(ListOfJobRoles, jobRolesService.getAllJobRoles());
-
     }
 
     @Test
     @DisplayName("Test for returning individual job roles")
-    void getJobRole_shouldReturnId_whenDaoReturnsId() throws SQLException, JobRoleDoesNotExistException, DatabaseConnectionException, FailedToGetAllJobRolesException {
-
+    void getJobRole_shouldReturnId_whenDaoReturnsId()
+            throws SQLException, JobRoleDoesNotExistException, FailedToGetJobRoleException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         JobRole jobRole = Mockito.mock(JobRole.class);
-        Mockito.when(jobRolesDao.getJobRolesById(1)).thenReturn(jobRole);
-
+        Mockito.when(jobRolesDao.getJobRolesById(conn, 1)).thenReturn(jobRole);
 
         assertEquals(jobRole, jobRolesService.getJobRolesById(1));
     }

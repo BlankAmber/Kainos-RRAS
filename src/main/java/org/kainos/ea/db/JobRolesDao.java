@@ -14,9 +14,9 @@ public class JobRolesDao {
         Statement statement = conn.createStatement();
 
         ResultSet resultSet = statement.executeQuery(
-                "SELECT job_role_id, job_role_name, " +
-                    "specification_summary, sharepoint_link " +
-                    "FROM job_role");
+                "SELECT job_role_id, job_role_name, "
+                        + "specification_summary, sharepoint_link "
+                        + "FROM job_role");
 
         List<JobRole> jobRolesList = new ArrayList<>();
 
@@ -37,9 +37,9 @@ public class JobRolesDao {
         Statement statement = conn.createStatement();
 
         ResultSet resultSet = statement.executeQuery(
-                "SELECT job_role_id, job_role_name, " +
-                "specification_summary, sharepoint_link FROM job_role" +
-                " where job_role_id = " + id);
+                "SELECT job_role_id, job_role_name, "
+                        + "specification_summary, sharepoint_link FROM job_role"
+                        + " where job_role_id = " + id);
 
         if (resultSet.next()) {
             return new JobRole(
