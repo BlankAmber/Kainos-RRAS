@@ -1,12 +1,6 @@
--- Create the database
 CREATE DATABASE IF NOT EXISTS KainosJobs_AdamM;
 
--- Use the database
 USE KainosJobs_AdamM;
-
-DROP TABLE IF EXISTS role;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS token;
 
 CREATE TABLE role (
     role_id int PRIMARY KEY AUTO_INCREMENT,
@@ -26,3 +20,17 @@ CREATE TABLE token (
     token varchar(64) NOT NULL,
     expiry_date DATETIME NOT NULL
 );
+
+ALTER TABLE user
+    DROP COLUMN salt;
+
+DROP TABLE IF EXISTS token;
+
+CREATE TABLE job_role (
+	job_role_id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    job_role_name varchar(64) NOT NULL
+);
+
+-- Remove case sensitivity as emails should be case in-sensitive
+ALTER TABLE user
+    MODIFY COLUMN email varchar(30) COLLATE utf8mb4_0900_ai_ci;
