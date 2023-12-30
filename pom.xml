@@ -6,18 +6,20 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kainos.ea</groupId>
-    <artifactId>JavaWebService</artifactId>
+    <groupId>org.kainos.ea</groupId>
+    <artifactId>DropwizardWebService</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>WebService</name>
+    <name>DropwizardWebService</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>2.0.23</dropwizard.version>
-        <mainClass>com.kainos.ea.WebServiceApplication</mainClass>
+        <mainClass>org.kainos.ea.DropwizardWebServiceApplication</mainClass>
+        <skipTests>false</skipTests>
+        <skipUnitTests>${skipTests}</skipUnitTests>
     </properties>
 
     <dependencyManagement>
@@ -33,17 +35,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>com.smoketurner</groupId>
-            <artifactId>dropwizard-swagger</artifactId>
-            <version>2.0.0-1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.validation</groupId>
-                    <artifactId>validation-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
@@ -63,7 +54,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.21</version>
+            <version>8.0.28</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -71,10 +62,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.smoketurner</groupId>
+            <artifactId>dropwizard-swagger</artifactId>
+            <version>2.0.0-1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>2.23.4</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.9.10</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -88,21 +95,14 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>1.9.10</version>
+            <groupId>com.password4j</groupId>
+            <artifactId>password4j</artifactId>
+            <version>1.7.3</version>
         </dependency>
         <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy-agent</artifactId>
-            <version>1.9.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.objenesis</groupId>
-            <artifactId>objenesis</artifactId>
-            <version>2.6</version>
-            <scope>test</scope>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.4.0</version>
         </dependency>
     </dependencies>
 
@@ -164,25 +164,21 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <excludes>
-                        <exclude>**/*IntegrationTest.java</exclude>
-                    </excludes>
+                    <skipTests>${skipUnitTests}</skipTests>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
+                        <id>run-integration-tests</id>
                         <phase>integration-test</phase>
-                        <configuration>
-                            <excludes>
-                                <exclude>none</exclude>
-                            </excludes>
-                            <includes>
-                                <include>**/*IntegrationTest.java</include>
-                            </includes>
-                        </configuration>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -209,6 +205,16 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                </configuration>
             </plugin>
         </plugins>
     </build>
