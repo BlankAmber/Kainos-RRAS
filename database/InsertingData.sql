@@ -2,10 +2,10 @@ INSERT INTO role (role_name) VALUES
     ('admin'),
     ('employee');
 
-INSERT INTO user (username, role_id, salt, secured_password) VALUES
-    ('Admin123', 1, 'qwertyui', '062742bd7303fd97dc3e059dc3595e97114ae28815901c518b9a4e283e9512f6'),
-    ('Employee123', 2, 'asdfghjk', '79fb350ff31e939d2b5d4b8ed498e2ec6782eed7943e943d29e40c6e4fbd077d');
-    
+INSERT INTO user (email, role_id, secured_password) VALUES
+    ('Admin123@email.com', 1, '$argon2id$v=19$m=12,t=20,p=2$zF67un22ocu44k36$7+rzhNKs600R2lucUV1oUH/+Jy787fike14aYJSP4zc'),
+    ('Employee123@email.com', 2, '$argon2id$v=19$m=12,t=20,p=2$r73eFJyTJN+IC59x$UYCJdZZkljs5CBP0LKS/gtmYAfiYnmGDLE1iMFOb4e8');
+
 -- Insert statements for the job roles table
 INSERT INTO job_role (job_role_name) VALUES
     ('Innovation Lead'),
@@ -356,7 +356,6 @@ INSERT INTO job_role (job_role_name) VALUES
     ('Education and Partnerships Lead'),
     ('Environmental Sustainability Lead'),
     ('Outreach and Engagement Senior Associate');
-
 
 UPDATE job_role
 SET specification_summary = 'As an Innovation Lead (Consultant) in Kainos, you’ll be responsible for leading efforts in providing advice and identifying new ways to use technology to solve customer problems. This is a dynamic and hands-on role which will involve leading the team, implementing and shaping Kainos’ innovation strategy and effectively communicating the exciting work we undertake both internally and within the wider technology community.', 

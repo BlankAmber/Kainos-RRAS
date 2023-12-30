@@ -9,4 +9,6 @@
     <suppress checks="TodoComment" files="."/>
     <suppress checks="DesignForExtension" files="."/>
     <suppress checks="FinalParameters" files="."/>
+    <suppress checks="MethodName" files="^.*?/test/.*\.java$"/>
+    <suppress checks="MagicNumber" files="^.*?/test/.*\.java$"/>
 </suppressions>

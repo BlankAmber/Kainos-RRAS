@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class DatabaseConnectorTest {
     @Test
     @DisplayName("Test valid SQL connection")
-    void testSQLConnectionValid() throws SQLException {
+    void getConnection_withNoInput_shouldReturnValidConnection() throws SQLException {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection connection = databaseConnector.getConnection();
         assertNotNull(connection);
@@ -23,11 +23,12 @@ public class DatabaseConnectorTest {
 
     @Test
     @DisplayName("Test invalid SQL connection")
-    void testSQLConnectionInvalid() {
+    void getConnection_withInvalidDatabaseProperties_shouldThrowCommunicationsException() {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
         DatabaseProperties props = new DatabaseProperties(
                 "user", "password", "host", "name");
         assertThrows(CommunicationsException.class, () -> {
-            DatabaseConnector.getConnection(props);
+            databaseConnector.getConnection(props);
         });
     }
 }

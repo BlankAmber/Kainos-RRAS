@@ -12,24 +12,16 @@ public class DatabaseConnector {
 
     private static Connection connection;
 
-    public static void resetConnection() {
-        DatabaseConnector.connection = null;
-    }
-
-    public DatabaseConnector() {
-
-    }
-
-    public static DatabaseProperties getDatabaseProperties() {
-        String user = System.getenv(ENV_DB_USERNAME);
+    public DatabaseProperties getDatabaseProperties() {
+        String username = System.getenv(ENV_DB_USERNAME);
         String password = System.getenv(ENV_DB_PASSWORD);
         String host = System.getenv(ENV_DB_HOST);
         String name = System.getenv(ENV_DB_NAME);
 
-        return new DatabaseProperties(user, password, host, name);
+        return new DatabaseProperties(username, password, host, name);
     }
 
-    public static Connection getConnection(DatabaseProperties props)
+    public Connection getConnection(DatabaseProperties props)
             throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:mysql://" + props.getHost() + "/" + props.getName()
@@ -50,7 +42,7 @@ public class DatabaseConnector {
             if (!props.isValid()) {
                 throw new IllegalArgumentException(
                         "Environment variables must be set for "
-                        + "DB_USERNAME, DB_PASSWORD, DB_HOST, and DB_NAME."
+                                + "DB_USERNAME, DB_PASSWORD, DB_HOST, and DB_NAME."
                 );
             }
 
