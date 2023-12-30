@@ -3,10 +3,9 @@ package org.kainos.ea.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kainos.ea.cli.JobBandLevel;
-import org.kainos.ea.cli.JobFamilyGroup;
-import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.api.JobRolesService;
+import org.kainos.ea.cli.JobBandLevel;
+import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.client.FailedToGetJobRoleException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
@@ -17,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import java.util.Arrays;
 import java.util.List;
 

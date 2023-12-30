@@ -1,7 +1,6 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.JobBandLevel;
-import org.kainos.ea.cli.JobFamilyGroup;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.client.FailedToGetJobRoleException;
