@@ -11,11 +11,11 @@ assert(sum(SPLIT_PERCENT) == 100)
 with open("ai/corpus/formality-dataset-dict.pkl", "rb") as dataset_file:
     dataset_dict = pickle.load(dataset_file)
 
-num_sentences = len(dataset_dict["formal"])
+num_texts = len(dataset_dict["formal"])
 start_index = 0
 for i, label in enumerate(("training", "validation", "testing")):
     percent = SPLIT_PERCENT[i]
-    end_index = start_index + floor(percent / 100 * num_sentences)
+    end_index = start_index + floor(percent / 100 * num_texts)
     if i == 2:
         end_index += 1
     split_dataset_dict = {k: v[start_index:end_index] for k, v in dataset_dict.items()}
