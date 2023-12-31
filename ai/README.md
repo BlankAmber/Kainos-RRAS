@@ -7,6 +7,8 @@ Credit
 How to run
 ---
 1. Run `corpus/split-dataset.py` to generate datasets for training, validation, and testing
+2. Run `corpus/preprocess-dataset.py` to preprocess the three datasets
+3. Run `corpus/vectorize-dataset.py` to vectorize the three datasets using TF-IDF
 
 Analysing the dataset
 ---
