@@ -7,3 +7,7 @@ Credit
 How to run
 ---
 1. Run `corpus/split-dataset.py` to generate datasets for training, validation, and testing
+
+Analysing the dataset
+---
+- Run cells in `corpus/analyse-dataset.ipynb`
