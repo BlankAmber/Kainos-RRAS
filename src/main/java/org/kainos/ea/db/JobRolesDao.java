@@ -22,7 +22,9 @@ public class JobRolesDao {
                 "FROM job_role j\n" +
                 "JOIN job_family jf ON j.job_family_id = jf.job_family_id\n" +
                 "JOIN job_family_group jfg ON jf.job_family_group_id = jfg.job_family_group_id\n" +
-                "JOIN management_level ml ON j.management_level_id = ml.management_level_id;");
+                "JOIN management_level ml ON j.management_level_id = ml.management_level_id\n" +
+                "ORDER BY j.job_role_id;");
+
 
         List<JobBandLevel> jobRolesList = new ArrayList<>();
 
