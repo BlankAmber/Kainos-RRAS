@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.DropwizardWebServiceApplication;
 import org.kainos.ea.DropwizardWebServiceConfiguration;
-import org.kainos.ea.cli.JobFamilyGroup;
+import org.kainos.ea.cli.JobBandLevel;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.cli.Login;
 
@@ -40,7 +40,7 @@ public class JobRolesIT {
                 .post(Entity.entity(login, MediaType.APPLICATION_JSON_TYPE))
                 .readEntity(String.class);
 
-        List<JobFamilyGroup> jobRolesList = APP.client()
+        List<JobBandLevel> jobRolesList = APP.client()
                 .target("http://localhost:8080/api/all-job-roles")
                 .request()
                 .header("Authorisation", "Bearer " + jwt)

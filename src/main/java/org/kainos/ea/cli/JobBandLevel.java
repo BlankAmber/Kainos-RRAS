@@ -3,21 +3,22 @@ package org.kainos.ea.cli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JobFamilyGroup {
-
+public class JobBandLevel {
     private int jobRoleId;
     private String jobRoleName;
-
     private String jobFamilyGroupName;
+    private String jobBandLevel;
 
     @JsonCreator
-    public JobFamilyGroup(
+    public JobBandLevel(
             @JsonProperty("jobRoleId") int jobRoleId,
             @JsonProperty("jobRoleName") String jobRoleName,
-            @JsonProperty("jobFamilyGroupName") String jobFamilyGroupName) {
+            @JsonProperty("jobFamilyGroupName") String jobFamilyGroupName,
+            @JsonProperty("jobBandLevel") String jobBandLevel) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
         this.jobFamilyGroupName = jobFamilyGroupName;
+        this.jobBandLevel = jobBandLevel;
     }
 
     public int getJobRoleId() {
@@ -42,5 +43,13 @@ public class JobFamilyGroup {
 
     public void setJobFamilyGroupName(String jobFamilyGroupName) {
         this.jobFamilyGroupName = jobFamilyGroupName;
+    }
+
+    public String getJobBandLevel() {
+        return jobBandLevel;
+    }
+
+    public void setJobBandLevel(String jobBandLevel) {
+        this.jobBandLevel = jobBandLevel;
     }
 }
