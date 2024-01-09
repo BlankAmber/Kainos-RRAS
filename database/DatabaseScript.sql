@@ -1,12 +1,6 @@
--- Create the database
 CREATE DATABASE IF NOT EXISTS KainosJobs_AdamM;
 
--- Use the database
 USE KainosJobs_AdamM;
-
-DROP TABLE IF EXISTS role;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS token;
 
 CREATE TABLE role (
     role_id int PRIMARY KEY AUTO_INCREMENT,
@@ -14,19 +8,22 @@ CREATE TABLE role (
 );
 
 CREATE TABLE user (
-    username varchar(30) PRIMARY KEY COLLATE utf8mb4_bin,
+    -- COLLATE utf8mb4_bin ensures case sensitivity
+    email varchar(30) PRIMARY KEY COLLATE utf8mb4_bin,
     role_id varchar(30) NOT NULL REFERENCES role (role_id),
-    salt char(8) NOT NULL,
     secured_password varchar(100) NOT NULL
 );
 
-CREATE TABLE token (
-    username varchar(30) REFERENCES user (username),
-    token varchar(64) NOT NULL,
-    expiry_date DATETIME NOT NULL
-);
+ALTER TABLE user
+    DROP COLUMN salt;
 
-CREATE TABLE job_role(
+DROP TABLE IF EXISTS token;
+
+-- Remove case sensitivity as emails should be case in-sensitive
+ALTER TABLE user
+    MODIFY COLUMN email varchar(30) COLLATE utf8mb4_0900_ai_ci;
+
+CREATE TABLE job_role (
 	job_role_id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
     job_role_name varchar(64) NOT NULL
 );
@@ -36,14 +33,10 @@ ALTER TABLE job_role
 ADD COLUMN specification_summary VARCHAR(4000),
 ADD COLUMN sharepoint_link VARCHAR(1000);
 
-
-
 ALTER TABLE job_role
 ADD COLUMN job_family_id int,
 ADD CONSTRAINT fk_job_role_job_family
 FOREIGN KEY (job_family_id) REFERENCES job_family(job_family_id);
-
-
 
 -- creation of job_family_group table
 CREATE TABLE job_family_group (

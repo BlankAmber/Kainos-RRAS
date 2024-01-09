@@ -2,35 +2,45 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main, ready-for-signoff ]
+    branches:
+      - main
   pull_request:
-    branches: [ main, ready-for-signoff ]
+
+env:
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_USERNAME: ${{ secrets.DB_USERNAME }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  TEST_ADMIN_ACCOUNT_EMAIL: ${{ secrets.TEST_ADMIN_ACCOUNT_EMAIL }}
+  TEST_ADMIN_ACCOUNT_PASSWORD: ${{ secrets.TEST_ADMIN_ACCOUNT_PASSWORD }}
+  TEST_EMPLOYEE_ACCOUNT_EMAIL: ${{ secrets.TEST_EMPLOYEE_ACCOUNT_EMAIL }}
+  TEST_EMPLOYEE_ACCOUNT_PASSWORD: ${{ secrets.TEST_EMPLOYEE_ACCOUNT_PASSWORD }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-      
+
     - name: Build with Maven
       run: mvn -B clean install -DskipTests
 
-    - name: Run linter
-      run: mvn checkstyle:check
+    - name: Run unit tests
+      run: mvn clean test
 
-    - name: Run tests
-      env:
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_NAME: ${{ secrets.DB_NAME }}
-      run: mvn test
+    - name: Run integration tests
+      run: mvn clean verify -DskipUnitTests
+
+    - name: Run linter
+      if: always()
+      run: mvn checkstyle:check

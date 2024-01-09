@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DatabasePropertiesTest {
     @Test
-    @DisplayName("Test for DatabaseProperties constructor and getters")
-    void testDatabasePropertiesConstructorAndGetters() {
+    @DisplayName("Test for constructor and getters")
+    void constructorAndGetters() {
         String expectedUsername = "TestUser";
         String expectedPassword = "TestPassword";
         String expectedHost = "TestHost";
@@ -29,7 +29,7 @@ public class DatabasePropertiesTest {
 
     @Test
     @DisplayName("Test for isValid() with valid input")
-    void testIsValidNotNull() {
+    void isValid_withValidProperties_shouldReturnTrue() {
         DatabaseProperties props = new DatabaseProperties(
                 "user", "password", "host", "name");
         assertTrue(props.isValid());
@@ -37,7 +37,7 @@ public class DatabasePropertiesTest {
 
     @Test
     @DisplayName("Test for isValid() with the user null")
-    void testIsValidUserNull() {
+    void isValid_withNullUsername_shouldReturnFalse() {
         DatabaseProperties props = new DatabaseProperties(
                 null, "password", "host", "name");
         assertFalse(props.isValid());
@@ -45,7 +45,7 @@ public class DatabasePropertiesTest {
 
     @Test
     @DisplayName("Test for isValid() with the password null")
-    void testIsValidPasswordNull() {
+    void isValid_withNullPassword_shouldReturnFalse() {
         DatabaseProperties props = new DatabaseProperties(
                 "user", null, "host", "name");
         assertFalse(props.isValid());
@@ -53,7 +53,7 @@ public class DatabasePropertiesTest {
 
     @Test
     @DisplayName("Test for isValid() with the host null")
-    void testIsValidHostNull() {
+    void isValid_withNullHost_shouldReturnFalse() {
         DatabaseProperties props = new DatabaseProperties(
                 "user", "password", null, "name");
         assertFalse(props.isValid());
@@ -61,7 +61,7 @@ public class DatabasePropertiesTest {
 
     @Test
     @DisplayName("Test for isValid() with the name null")
-    void testIsValidNameNull() {
+    void isValid_withNullName_shouldReturnFalse() {
         DatabaseProperties props = new DatabaseProperties(
                 "user", "password", "host", null);
         assertFalse(props.isValid());

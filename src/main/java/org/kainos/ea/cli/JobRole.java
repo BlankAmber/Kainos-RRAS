@@ -1,21 +1,20 @@
 package org.kainos.ea.cli;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobRole {
-
     private int jobRoleId;
     private String jobRoleName;
-
     private String jobRoleSpec;
     private String jobRoleLink;
 
-    private String jobFamilyGroupName;
-
-    public JobRole() {
-        // Default constructor
-    }
-
-    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink) {
+    @JsonCreator
+    public JobRole(
+            @JsonProperty("jobRoleId") int jobRoleId,
+            @JsonProperty("jobRoleName") String jobRoleName,
+            @JsonProperty("jobRoleSpec") String jobRoleSpec,
+            @JsonProperty("jobRoleLink") String jobRoleLink) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
         this.jobRoleSpec = jobRoleSpec;
@@ -53,14 +52,5 @@ public class JobRole {
 
     public void setJobRoleLink(String jobRoleLink) {
         this.jobRoleLink = jobRoleLink;
-    }
-
-
-    public String getJobFamilyGroupName() {
-        return jobFamilyGroupName;
-    }
-
-    public void setJobFamilyGroupName(String jobFamilyGroupName) {
-        this.jobFamilyGroupName = jobFamilyGroupName;
     }
 }
