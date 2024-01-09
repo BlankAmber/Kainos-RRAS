@@ -44,8 +44,8 @@ public class JobRolesController {
     @GET
     @Path("/all-job-roles/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJobRolesById(@HeaderParam("Authorisation") String authHeader,
-                                    @PathParam("id") int jobRoleId) {
+    public Response getJobRoleById(@HeaderParam("Authorisation") String authHeader,
+                                   @PathParam("id") int jobRoleId) {
         Response response = ControllerUtil.validAuthHeaderAtLeastEmployee(authHeader);
         if (response != null) {
             return response;
@@ -53,7 +53,7 @@ public class JobRolesController {
 
         try {
             return Response.status(HttpStatus.OK_200)
-                    .entity(jobRolesService.getJobRolesById(jobRoleId)).build();
+                    .entity(jobRolesService.getJobRoleById(jobRoleId)).build();
         } catch (FailedToGetJobRoleException e)  {
             System.err.println(e.getMessage());
             return Response.serverError().build();

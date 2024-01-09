@@ -357,52 +357,215 @@ INSERT INTO job_role (job_role_name) VALUES
     ('Environmental Sustainability Lead'),
     ('Outreach and Engagement Senior Associate');
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = 'As an Innovation Lead (Consultant) in Kainos, you’ll be responsible for leading efforts in providing advice and identifying new ways to use technology to solve customer problems. This is a dynamic and hands-on role which will involve leading the team, implementing and shaping Kainos’ innovation strategy and effectively communicating the exciting work we undertake both internally and within the wider technology community.', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20Profile%20%2D%20Technology%20Leader%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 1;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = 'A technology leader is key strategic role within the business making executive technology decisions on behalf of the business, based upon the sector and practices’ strategic direction and goals.The core responsibilities of a technology leader in Kainos include setting a Technology direction, a technical advisor to the business and C-level clients, maintaining a commercial edge over other technology services providers, developing and nurturing technical talent across the organisation and representing Kainos as a technology evangelist.', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20Profile%20%2D%20Technology%20Leader%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 2;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = 'The Kainos Earn as you Learn Programme is back! Our highly-regarded scheme gives the opportunity to work for us as an Apprentice Software Engineer four days per week, while studying for a part time degree in Computing Systems one day per week, with Ulster University, Jordanstown, completing your degree in just four and a half years. The best of both worlds! This is an excellent opportunity to combine real work and technical experience within our fast-changing company, with the formal studies that you need to progress your career in IT. It’s a no brainer! We’ll pay all of your University fees, provide you with a brandnew laptop as well as a full-time salary throughout.  Oh, and it doesn’t end there. You will be offered a permanent position with us from day one, and we’ll help you to quickly progress up our ranks with our excellent (and award-winning!) in-house training programme Kainos MAP. It’s a great way to compliment your studies.',
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Apprentice%20Software%20Engineer%20%28Apprentice%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 3;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = 'As a Trainee Software Engineer with Kainos, you will work on projects where you can make a real difference to people’s lives – the lives of people you know. After taking part in our award-winning, seven-week Engineering Academy, you will then join one of our many project teams, to learn from our experienced developers, project managers and customer-facing staff. You’ll have great support and mentoring, balanced with the experience of being given real, meaningful work to do, to help you truly develop both technically and professionally. ', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Software%20Engineer%20%28Trainee%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 4;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = 'As a Support Technician (Associate) in Kainos, you’ll be responsible for analysing and solving complicated technical issues. You will adhere to ITIL standards and will participate fully in the Incident management lifecycle. You will work closely with clients, internal teams and 3rd Party vendors to ensure that problems are resolved. You’ll do this whilst learning about new approaches, with talented colleagues that will help you to learn, develop and grow. ', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20Profile%20%2D%20Support%20Technician%20%28As%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 5;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = '', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/sites/PeopleTeam-SharedDrive/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FPeopleTeam%2DSharedDrive%2FShared%20Documents%2FPeople%20Team%20Shared%20Drive%2FOrganisational%20Development%20%26%20Learning%2FCareer%20Lattice%2FApproved%20Job%20Profiles%2FEngineering%2FEngineering%2FJob%20Profile%20%2D%20Front%2DEnd%20Engineer%20%28A%29%2Epdf&parent=%2Fsites%2FPeopleTeam%2DSharedDrive%2FShared%20Documents%2FPeople%20Team%20Shared%20Drive%2FOrganisational%20Development%20%26%20Learning%2FCareer%20Lattice%2FApproved%20Job%20Profiles%2FEngineering%2FEngineering'
 WHERE job_role_id = 6;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = '', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Software%20Engineer%20%28Associate%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 7;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = '', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20Profile%20%2D%20Senior%20Support%20Technician%20%28SA%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 8;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = '', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/sites/PeopleTeam-SharedDrive/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FPeopleTeam%2DSharedDrive%2FShared%20Documents%2FPeople%20Team%20Shared%20Drive%2FOrganisational%20Development%20%26%20Learning%2FCareer%20Lattice%2FApproved%20Job%20Profiles%2FEngineering%2FEngineering%2FJob%20Profile%20%2D%20Senior%20Front%2DEnd%20Engineer%20%28SA%29%2Epdf&parent=%2Fsites%2FPeopleTeam%2DSharedDrive%2FShared%20Documents%2FPeople%20Team%20Shared%20Drive%2FOrganisational%20Development%20%26%20Learning%2FCareer%20Lattice%2FApproved%20Job%20Profiles%2FEngineering%2FEngineering'
 WHERE job_role_id = 9;
 
-UPDATE job_roles
+UPDATE job_role
 SET specification_summary = '', 
 sharepoint_link = 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Senior%20Software%20Engieneer%20%28Senior%20Associate%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering'
 WHERE job_role_id = 10;
+
+-- Insert statements for job_family_group table
+INSERT INTO job_family_group (job_family_group_name) VALUES 
+	('Engineering'),
+	('Platforms'),
+	('Data and AI'),
+	('Cyber Security'),
+	('Workday'),
+	('Experience Design'),
+	('Product'),
+	('Delivery'),
+	('Operations'),
+	('Business Development and Market'),
+	('OS and Planning'),
+	('People'),
+	('Commercial and Financial Management'),
+	('Business Services Support');
+    
+-- Insert statements for job_family table
+INSERT INTO job_family (job_family_name, job_family_group_id) VALUES
+    ('Engineering Strategy and Planning', 1),
+    ('Engineering', 1),
+    ('Architecture', 1),
+    ('Testing and Quality Assurance', 1),
+    ('Product Specialist', 1),
+    ('Low Code Engineering', 1),
+    ('Platform Strategy and Planning', 2),
+    ('Platform Engineering', 2),
+    ('Platform Architecture', 2),
+    ('Platform Specialists', 2),
+    ('Cloud Migration', 2),
+    ('Systems Support', 2),
+    ('Data Engineering', 3),
+    ('Data Architecture', 3),
+    ('Artificial Intelligence (AI) Engineering', 3),
+    ('Data Science', 3),
+    ('Data Consulting', 3),
+    ('Data Analytics', 3),
+    ('Security Strategy and Planning', 4),
+    ('Security Engineering', 4),
+    ('Corporate Security', 4),
+    ('Strategy and Planning', 5),
+    ('HCM', 5),
+    ('Financials', 5),
+    ('Data', 5),
+    ('Integrations', 5),
+    ('Change & User Adoption', 5),
+    ('Adaptive Planning', 5),
+    ('Product Services', 5),
+    ('Product Development', 5),
+    ('Extend', 5),
+    ('Spend Management', 5),
+    ('Insights', 6),
+    ('Content Design', 6),
+    ('UX / Visual Design', 6),
+    ('Service Design', 6),
+    ('Product Consultancy', 7),
+    ('Digital Advisory Consultancy', 7),
+    ('Low Code Consultancy', 7),
+    ('Delivery Strategy & Planning', 8),
+    ('Delivery Management', 8),
+    ('Engineering Management', 8),
+    ('Service Management', 8),
+    ('Workday Engagement Management', 8),
+    ('Programme Management Office (PMO)', 8),
+    ('Operations Strategy and Planning', 9),
+    ('Operational Management', 9),
+    ('Staff Management', 9),
+    ('Strategy and Planning', 10),
+    ('Business Development', 10),
+    ('Client Management', 10),
+    ('Partners', 10),
+    ('Bid Production', 10),
+    ('Inside Sales', 10),
+    ('Marketing – Business', 10),
+    ('Marketing – Martech', 10),
+    ('Organisational', 11),
+    ('People Strategy and Planning', 12),
+    ('People Operations / Strategic Partnering', 12),
+    ('Engagement, Culture and Development', 12),
+    ('Talent Acquisition', 12),
+    ('Commercial and Financial Management Strategy & Planning', 13),
+    ('Commercial', 13),
+    ('Financial Management', 13),
+    ('Payroll', 13),
+    ('Business Services', 14),
+    ('Property Management', 14),
+    ('Travel Management', 14),
+    ('Corporate Social Responsibility Management', 14);
+
+UPDATE job_role
+SET job_family_id = 1
+WHERE job_role_id BETWEEN 1 AND 2;
+
+UPDATE job_role
+SET job_family_id = 2
+WHERE job_role_id BETWEEN 3 AND 12;
+
+UPDATE job_role
+SET job_family_id = 3
+WHERE job_role_id BETWEEN 13 AND 16;
+
+UPDATE job_role
+SET job_family_id = 4
+WHERE job_role_id BETWEEN 17 AND 25;
+
+UPDATE job_role
+SET job_family_id = 5
+WHERE job_role_id BETWEEN 26 AND 29;
+
+UPDATE job_role
+SET job_family_id = 6
+WHERE job_role_id BETWEEN 20 AND 32;
+
+SELECT * FROM job_role;
+
+UPDATE job_role
+SET job_family_id = 7
+WHERE job_role_id = 33;
+
+UPDATE job_role
+SET job_family_id = 8
+WHERE job_role_id BETWEEN 34 AND 37;
+
+UPDATE job_role
+SET job_family_id = 9
+WHERE job_role_id BETWEEN 38 AND 40;
+
+UPDATE job_role
+SET job_family_id = 10
+WHERE job_role_id BETWEEN 41 AND 43;
+
+UPDATE job_role
+SET job_family_id = 11
+WHERE job_role_id BETWEEN 44 AND 45;
+
+UPDATE job_role
+SET job_family_id = 12
+WHERE job_role_id BETWEEN 46 AND 56;
+
+UPDATE job_role
+SET job_family_id = 13
+WHERE job_role_id BETWEEN 57 AND 62;
+
+UPDATE job_role
+SET job_family_id = 14
+WHERE job_role_id BETWEEN 63 AND 65;
+
+UPDATE job_role
+SET job_family_id = 15
+WHERE job_role_id BETWEEN 66 AND 70;
+
+UPDATE job_role
+SET job_family_id = 16
+WHERE job_role_id BETWEEN 71 AND 75;
+
+UPDATE job_role
+SET job_family_id = 17
+WHERE job_role_id BETWEEN 76 AND 79;
+
+UPDATE job_role
+SET job_family_id = 18
+WHERE job_role_id BETWEEN 80 AND 84;

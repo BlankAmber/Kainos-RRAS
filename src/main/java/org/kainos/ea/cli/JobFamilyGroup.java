@@ -3,24 +3,22 @@ package org.kainos.ea.cli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JobRole {
+public class JobFamilyGroup {
+
     private int jobRoleId;
     private String jobRoleName;
-    private String jobRoleSpec;
-    private String jobRoleLink;
+
+    private String jobFamilyGroupName;
 
     @JsonCreator
-    public JobRole(
+    public JobFamilyGroup(
             @JsonProperty("jobRoleId") int jobRoleId,
             @JsonProperty("jobRoleName") String jobRoleName,
-            @JsonProperty("jobRoleSpec") String jobRoleSpec,
-            @JsonProperty("jobRoleLink") String jobRoleLink) {
+            @JsonProperty("jobFamilyGroupName") String jobFamilyGroupName) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
-        this.jobRoleSpec = jobRoleSpec;
-        this.jobRoleLink = jobRoleLink;
+        this.jobFamilyGroupName = jobFamilyGroupName;
     }
-
 
     public int getJobRoleId() {
         return jobRoleId;
@@ -38,19 +36,11 @@ public class JobRole {
         this.jobRoleName = jobRoleName;
     }
 
-    public String getJobRoleSpec() {
-        return jobRoleSpec;
+    public String getJobFamilyGroupName() {
+        return jobFamilyGroupName;
     }
 
-    public void setJobRoleSpec(String jobRoleSpec) {
-        this.jobRoleSpec = jobRoleSpec;
-    }
-
-    public String getJobRoleLink() {
-        return jobRoleLink;
-    }
-
-    public void setJobRoleLink(String jobRoleLink) {
-        this.jobRoleLink = jobRoleLink;
+    public void setJobFamilyGroupName(String jobFamilyGroupName) {
+        this.jobFamilyGroupName = jobFamilyGroupName;
     }
 }
