@@ -18,6 +18,9 @@ public class JobBandLevel {
         this.jobBandLevel = jobBandLevel;
     }
 
+    public JobBandLevel(String managementLevelName) {
+    }
+
     public int getJobRoleId() {
         return jobRoleId;
     }

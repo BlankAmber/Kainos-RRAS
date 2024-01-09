@@ -10,16 +10,24 @@ public class JobRole {
     private String jobRoleLink;
 
     private String jobFamilyGroupName;
+    private String jobRoleBandLevel;
+    private String jobResponsibilities;
+
+    private String jobManagementLevel;
+
 
     public JobRole() {
         // Default constructor
     }
 
-    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink) {
+    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink, String jobResponsibilities, String jobRoleBandLevel, String jobManagementLevel) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
         this.jobRoleSpec = jobRoleSpec;
         this.jobRoleLink = jobRoleLink;
+        this.jobResponsibilities = jobResponsibilities;
+        this.jobRoleBandLevel = jobRoleBandLevel;
+        this.jobManagementLevel = jobManagementLevel;
     }
 
 
@@ -62,5 +70,27 @@ public class JobRole {
 
     public void setJobFamilyGroupName(String jobFamilyGroupName) {
         this.jobFamilyGroupName = jobFamilyGroupName;
+    }
+    public String getJobRoleBandLevel() {
+        return jobRoleBandLevel;
+    }
+
+    public void setJobRoleBandLevel(String jobRoleBandLevel) {
+        this.jobRoleBandLevel = jobRoleBandLevel;
+    }
+    public String getJobResponsibilities() {
+        return jobResponsibilities;
+    }
+
+    public void setJobResponsibilities(String jobResponsibilities) {
+        this.jobResponsibilities = jobResponsibilities;
+    }
+
+    public String getJobManagementLevel() {
+        return jobManagementLevel;
+    }
+
+    public void setJobManagementLevel(String jobManagementLevel) {
+        this.jobManagementLevel = jobManagementLevel;
     }
 }

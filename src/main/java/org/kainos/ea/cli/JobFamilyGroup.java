@@ -14,6 +14,10 @@ public class JobFamilyGroup {
         this.jobFamilyGroupName = jobFamilyGroupName;
     }
 
+    public JobFamilyGroup(String jobFamilyGroupName) {
+        this.jobFamilyGroupName = jobFamilyGroupName;
+    }
+
     public int getJobRoleId() {
         return jobRoleId;
     }

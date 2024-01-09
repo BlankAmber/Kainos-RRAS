@@ -27,19 +27,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class JobRolesServiceTest {
-
-
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
-
     JobRolesDao jobRolesDao = Mockito.mock(JobRolesDao.class);
     JobRolesService jobRolesService = new JobRolesService(jobRolesDao, databaseConnector);
-
     Connection conn;
 
     @Test
     @DisplayName("Test returning job roles")
     void getJobRoles_shouldReturnJobRoles_whenDaoReturnsJobRoles() throws SQLException, FailedToGetAllJobRolesException {
-
         List<JobResponsibilities> ListOfJobRoles = Arrays.asList(
                 Mockito.mock(JobResponsibilities.class),
                 Mockito.mock(JobResponsibilities.class),
@@ -47,23 +42,17 @@ public class JobRolesServiceTest {
                 Mockito.mock(JobResponsibilities.class)
 
         );
-
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRolesDao.getAllJobRoles(conn)).thenReturn(ListOfJobRoles);
-
         assertEquals(ListOfJobRoles, jobRolesService.getAllJobRoles());
-
     }
 
     @Test
     @DisplayName("Test for returning individual job roles")
     void getJobRole_shouldReturnId_whenDaoReturnsId() throws SQLException, JobRoleDoesNotExistException, DatabaseConnectionException, FailedToGetAllJobRolesException {
-
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         JobRole jobRole = Mockito.mock(JobRole.class);
         Mockito.when(jobRolesDao.getJobRolesById(1)).thenReturn(jobRole);
-
-
         assertEquals(jobRole, jobRolesService.getJobRolesById(1));
     }
 

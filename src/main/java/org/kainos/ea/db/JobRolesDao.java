@@ -44,15 +44,23 @@ public class JobRolesDao {
 
         Statement s = connection.createStatement();
 
-        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link FROM job_role" +
+        ResultSet rs = s.executeQuery("SELECT job_role_id, job_role_name, specification_summary, sharepoint_link, responsibilities, job_family_group_name, management_level_name FROM job_role j " +
+                "JOIN job_family jf ON j.job_family_id = jf.job_family_id\n" +
+                "JOIN job_family_group jfg ON jf.job_family_group_id = jfg.job_family_group_id\n" +
+                "JOIN management_level ml ON j.management_level_id = ml.management_level_id\n" +
                 " where job_role_id = " + id);
+
+
 
         while (rs.next()) {
             return new JobRole(
                     rs.getInt("job_role_id"),
                     rs.getString("job_role_name"),
                     rs.getString("specification_summary"),
-                    rs.getString("sharepoint_link")
+                    rs.getString("sharepoint_link"),
+                    rs.getString("responsibilities"),
+                    rs.getString("job_family_group_name"),
+                    rs.getString("management_level_name")
             );
         }
         return null;
@@ -70,7 +78,7 @@ public class JobRolesDao {
         s.setInt(2, jobRoleRequest.getJobFamilyGroupId());
         s.setInt(3, jobRoleRequest.getJobBandLevelId());
         s.setString(4, jobRoleRequest.getJobRoleSpec());
-        s.setString(5, jobRoleRequest.getJobRoleSpec());
+        s.setString(5, jobRoleRequest.getJobRoleLink());
         s.setString(6, jobRoleRequest.getJobResponsibilities());
 
         s.executeUpdate();
@@ -83,5 +91,41 @@ public class JobRolesDao {
         return -1;
     }
 
+    public List<JobFamilyGroup> getAllJobFamilies(Connection c) throws SQLException {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
+
+        Statement s = connection.createStatement();
+
+        ResultSet rs = s.executeQuery("SELECT job_family_group_name FROM job_family_group");
+
+        List<JobFamilyGroup> jobFamilyGroupList = new ArrayList<>();
+
+        while (rs.next()) {
+            JobFamilyGroup jobFamilyGroup = new JobFamilyGroup(
+                    rs.getString("job_family_group_name"));
+
+            jobFamilyGroupList.add(jobFamilyGroup);
+        }
+        return jobFamilyGroupList;
+    }
+    public List<JobBandLevel> getAllJobBandLevels(Connection c) throws SQLException {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
+
+        Statement s = connection.createStatement();
+
+        ResultSet rs = s.executeQuery("SELECT management_level_name FROM management_level");
+
+        List<JobBandLevel> jobBandLevelList = new ArrayList<>();
+
+        while (rs.next()) {
+            JobBandLevel jobBandLevel = new JobBandLevel(
+                    rs.getString("management_level_name"));
+
+            jobBandLevelList.add(jobBandLevel);
+        }
+        return jobBandLevelList;
+    }
 
 }

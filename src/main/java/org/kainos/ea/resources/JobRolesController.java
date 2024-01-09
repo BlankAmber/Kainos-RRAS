@@ -4,6 +4,7 @@ import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.cli.JobRoleRequest;
 import org.kainos.ea.client.*;
+import org.kainos.ea.core.JobRoleValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 
@@ -18,6 +19,7 @@ public class JobRolesController {
 
 
     private static JobRolesService jobRolesService;
+    private static JobRoleValidator jobRoleValidator;
 
     public JobRolesController() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -56,19 +58,41 @@ public class JobRolesController {
     @POST
     @Path("/job-role")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createJobRole(JobRoleRequest jobRoleRequest) {
+    public Response createJobRole(JobRoleRequest jobRoleRequest) throws JobRoleLinkLengthException, JobRoleSpecLengthException, JobBandLevelIdException, JobRoleNameLengthException, JobFamilyGroupIdException, JobResponsibilitiesLengthException {
+        if (jobRoleValidator.isValidJobRole(jobRoleRequest)) {
+            try {
+                int id = jobRolesService.createJobRole(jobRoleRequest);
+                return Response.status(HttpStatus.CREATED_201).entity(id).build();
+            } catch (Exception | FailedToCreateJobRoleException | InvalidJobRoleException e) {
+                System.out.println(e);
+                return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+            }
+        } else {
+            return Response.status(HttpStatus.BAD_REQUEST_400).build();
+        }
+    }
+
+    @GET
+    @Path("/job-family-names")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllJobFamilies() {
         try {
-            return Response.ok(jobRolesService.createJobRole(jobRoleRequest)).build();
-        }
-        catch (FailedToCreateJobRoleException e) {
+            return Response.ok(jobRolesService.getAllFamilyGroups()).build();
+        } catch (FailedToGetAllFamilyGroupsException e) {
             System.err.println(e.getMessage());
-
-            return Response.serverError().build();
+            return  Response.serverError().build();
         }
-        catch (InvalidJobRoleException e) {
-            System.err.println(e.getMessage());
+    }
 
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+    @GET
+    @Path("/band-levels")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllCapabilities() {
+        try {
+            return Response.ok(jobRolesService.getAllBandLevels()).build();
+        } catch (FailedToGetAllBandLevelsException e) {
+            System.err.println(e.getMessage());
+            return  Response.serverError().build();
         }
     }
 
