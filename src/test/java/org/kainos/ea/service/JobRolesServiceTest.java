@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.JobRolesService;
-import org.kainos.ea.cli.JobBandLevel;
 import org.kainos.ea.cli.JobResponsibilities;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;

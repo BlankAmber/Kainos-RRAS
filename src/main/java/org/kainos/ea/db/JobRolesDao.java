@@ -14,11 +14,12 @@ public class JobRolesDao {
     public List<JobResponsibilities> getAllJobRoles(Connection conn) throws SQLException {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(
-                "SELECT j.job_role_id, j.job_role_name, jfg.job_family_group_name, ml.management_level_name, responsibilities\n" +
-                "FROM job_role j\n" +
-                "JOIN job_family jf ON j.job_family_id = jf.job_family_id\n" +
-                "JOIN job_family_group jfg ON jf.job_family_group_id = jfg.job_family_group_id\n" +
-                "JOIN management_level ml ON j.management_level_id = ml.management_level_id;");
+                "SELECT j.job_role_id, j.job_role_name, jfg.job_family_group_name, "
+                + "ml.management_level_name, responsibilities "
+                + "FROM job_role j "
+                + "JOIN job_family jf ON j.job_family_id = jf.job_family_id "
+                + "JOIN job_family_group jfg ON jf.job_family_group_id = jfg.job_family_group_id "
+                + "JOIN management_level ml ON j.management_level_id = ml.management_level_id");
 
         List<JobResponsibilities> jobRolesList = new ArrayList<>();
         while (resultSet.next()) {
