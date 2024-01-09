@@ -2,36 +2,22 @@ package org.kainos.ea.cli;
 
 public class JobFamilyGroup {
 
-    private int jobRoleId;
-    private String jobRoleName;
+    private int jobFamilyGroupId;
 
     private String jobFamilyGroupName;
 
 
-    public JobFamilyGroup(int jobRoleId, String jobRoleName, String jobFamilyGroupName) {
-        this.jobRoleId = jobRoleId;
-        this.jobRoleName = jobRoleName;
+    public JobFamilyGroup(int jobFamilyGroupId, String jobFamilyGroupName) {
+        this.jobFamilyGroupId = jobFamilyGroupId;
         this.jobFamilyGroupName = jobFamilyGroupName;
     }
 
-    public JobFamilyGroup(String jobFamilyGroupName) {
-        this.jobFamilyGroupName = jobFamilyGroupName;
+    public int getJobFamilyGroupId() {
+        return jobFamilyGroupId;
     }
 
-    public int getJobRoleId() {
-        return jobRoleId;
-    }
-
-    public void setJobRoleId(int jobRoleId) {
-        this.jobRoleId = jobRoleId;
-    }
-
-    public String getJobRoleName() {
-        return jobRoleName;
-    }
-
-    public void setJobRoleName(String jobRoleName) {
-        this.jobRoleName = jobRoleName;
+    public void setJobFamilyGroupId(int jobFamilyGroupId) {
+        this.jobFamilyGroupId = jobFamilyGroupId;
     }
 
     public String getJobFamilyGroupName() {

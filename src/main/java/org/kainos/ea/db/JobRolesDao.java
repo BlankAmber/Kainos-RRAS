@@ -96,13 +96,12 @@ public class JobRolesDao {
         Connection connection = databaseConnector.getConnection();
 
         Statement s = connection.createStatement();
-
-        ResultSet rs = s.executeQuery("SELECT job_family_group_name FROM job_family_group");
-
+        ResultSet rs = s.executeQuery("SELECT job_family_group_id, job_family_group_name FROM job_family_group");
         List<JobFamilyGroup> jobFamilyGroupList = new ArrayList<>();
 
         while (rs.next()) {
             JobFamilyGroup jobFamilyGroup = new JobFamilyGroup(
+                    rs.getInt("job_family_group_id"),
                     rs.getString("job_family_group_name"));
 
             jobFamilyGroupList.add(jobFamilyGroup);
@@ -115,12 +114,13 @@ public class JobRolesDao {
 
         Statement s = connection.createStatement();
 
-        ResultSet rs = s.executeQuery("SELECT management_level_name FROM management_level");
+        ResultSet rs = s.executeQuery("SELECT management_level_id,management_level_name FROM management_level");
 
         List<JobBandLevel> jobBandLevelList = new ArrayList<>();
 
         while (rs.next()) {
             JobBandLevel jobBandLevel = new JobBandLevel(
+                    rs.getInt("management_level_id"),
                     rs.getString("management_level_name"));
 
             jobBandLevelList.add(jobBandLevel);

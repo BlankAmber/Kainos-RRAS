@@ -1,9 +1,7 @@
 package org.kainos.ea.cli;
 
 public class JobBandLevel {
-    private int jobRoleId;
-    private String jobRoleName;
-    private String jobFamilyGroupName;
+    private int jobBandLevelId;
     private String jobBandLevel;
 
     public JobBandLevel(){
@@ -11,38 +9,17 @@ public class JobBandLevel {
     }
 
 
-    public JobBandLevel(int jobRoleId, String jobRoleName, String jobFamilyGroupName, String jobBandLevel) {
-        this.jobRoleId = jobRoleId;
-        this.jobRoleName = jobRoleName;
-        this.jobFamilyGroupName = jobFamilyGroupName;
+    public JobBandLevel(int jobBandLevelId, String jobBandLevel) {
+        this.jobBandLevelId = jobBandLevelId;
         this.jobBandLevel = jobBandLevel;
     }
 
-    public JobBandLevel(String managementLevelName) {
+    public int getJobBandLevelId() {
+        return jobBandLevelId;
     }
 
-    public int getJobRoleId() {
-        return jobRoleId;
-    }
-
-    public void setJobRoleId(int jobRoleId) {
-        this.jobRoleId = jobRoleId;
-    }
-
-    public String getJobRoleName() {
-        return jobRoleName;
-    }
-
-    public void setJobRoleName(String jobRoleName) {
-        this.jobRoleName = jobRoleName;
-    }
-
-    public String getJobFamilyGroupName() {
-        return jobFamilyGroupName;
-    }
-
-    public void setJobFamilyGroupName(String jobFamilyGroupName) {
-        this.jobFamilyGroupName = jobFamilyGroupName;
+    public void setJobBandLevelId(int jobBandLevelId) {
+        this.jobBandLevelId = jobBandLevelId;
     }
 
     public String getJobBandLevel() {
