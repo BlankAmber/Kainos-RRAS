@@ -6,8 +6,8 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.ea.resources.AuthController;
-import org.kainos.ea.resources.JobRolesController;
 import org.kainos.ea.resources.RegisterController;
+import org.kainos.ea.resources.JobRolesController;
 
 public class DropwizardWebServiceApplication
         extends Application<DropwizardWebServiceConfiguration> {

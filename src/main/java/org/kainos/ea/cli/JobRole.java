@@ -6,13 +6,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JobRole {
     private int jobRoleId;
     private String jobRoleName;
+    private String jobRoleSpec;
+    private String jobRoleLink;
 
     @JsonCreator
     public JobRole(
             @JsonProperty("jobRoleId") int jobRoleId,
-            @JsonProperty("jobRoleName") String jobRoleName) {
+            @JsonProperty("jobRoleName") String jobRoleName,
+            @JsonProperty("jobRoleSpec") String jobRoleSpec,
+            @JsonProperty("jobRoleLink") String jobRoleLink) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
+        this.jobRoleSpec = jobRoleSpec;
+        this.jobRoleLink = jobRoleLink;
     }
 
     public int getJobRoleId() {
@@ -29,5 +35,21 @@ public class JobRole {
 
     public void setJobRoleName(String jobRoleName) {
         this.jobRoleName = jobRoleName;
+    }
+
+    public String getJobRoleSpec() {
+        return jobRoleSpec;
+    }
+
+    public void setJobRoleSpec(String jobRoleSpec) {
+        this.jobRoleSpec = jobRoleSpec;
+    }
+
+    public String getJobRoleLink() {
+        return jobRoleLink;
+    }
+
+    public void setJobRoleLink(String jobRoleLink) {
+        this.jobRoleLink = jobRoleLink;
     }
 }
