@@ -28,4 +28,4 @@ RUN mvn clean install -DskipTests
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "/code/target/DropwizardWebService-1.0-SNAPSHOT.jar", "server", "/config.yml"]
+CMD ["java", "-jar", "/code/target/DropwizardWebService-1.0-SNAPSHOT.jar", "server", "/code/config.yml"]
