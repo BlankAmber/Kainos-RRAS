@@ -2,6 +2,7 @@ package org.kainos.ea.db;
 
 import org.kainos.ea.cli.JobResponsibilities;
 import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.util.DaoUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -59,5 +60,10 @@ public class JobRolesDao {
             );
         }
         return null;
+    }
+
+    public void deleteJobRoleById(Connection conn, int id) throws SQLException {
+        String statement = "DELETE FROM job_role j WHERE j.job_role_id = ?";
+        DaoUtil.executeStatement(conn, statement, false, id);
     }
 }
