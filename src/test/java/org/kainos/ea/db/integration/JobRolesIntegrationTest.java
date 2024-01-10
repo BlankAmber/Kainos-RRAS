@@ -65,4 +65,24 @@ public class JobRolesIntegrationTest {
 
         Assertions.assertNotNull(id);
     }
+
+    @Test
+    @DisplayName("Integration test for returning a list of the Job Families")
+    void getJobFamilies_shouldReturnListOfJobFamilies() {
+        List<JobFamilyGroup> response = APP.client().target("http://localhost:8080/api/job-family-names")
+                .request()
+                .get(List.class);
+
+        Assertions.assertTrue(response.size() > 0);
+    }
+
+    @Test
+    @DisplayName("Integration test for returning a list of the Band Levels")
+    void getBandLevels_shouldReturnListOfBandLevels() {
+        List<JobBandLevel> response = APP.client().target("http://localhost:8080/api/band-levels")
+                .request()
+                .get(List.class);
+
+        Assertions.assertTrue(response.size() > 0);
+    }
 }

@@ -68,7 +68,7 @@ public class JobRolesDao {
         return null;
     }
 
-    public int createJobRole(JobRoleRequest jobRoleRequest) throws SQLException {
+    public int createJobRole(JobRoleRequest jobRoleRequest, Connection c) throws SQLException {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection connection = databaseConnector.getConnection();
 
@@ -83,7 +83,12 @@ public class JobRolesDao {
         s.setString(5, jobRoleRequest.getJobRoleLink());
         s.setString(6, jobRoleRequest.getJobResponsibilities());
 
-        s.executeUpdate();
+
+        int affectedRows = s.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Creating role failed, no rows affected.");
+        }
 
         ResultSet rs = s.getGeneratedKeys();
 

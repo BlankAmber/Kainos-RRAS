@@ -77,7 +77,7 @@ public class JobRolesService {
 
     }
 
-    public int createJobRole(JobRoleRequest jobRoleRequest) throws FailedToCreateJobRoleException, InvalidJobRoleException {
+    public int createJobRole(JobRoleRequest jobRoleRequest) throws FailedToCreateJobRoleException, InvalidJobRoleException, SQLException {
         try {
             String validation = jobRoleValidator.isValidJobRole(jobRoleRequest);
 
@@ -85,7 +85,7 @@ public class JobRolesService {
                 throw new InvalidJobRoleException(validation);
             }
 
-            int id = jobRolesDao.createJobRole(jobRoleRequest);
+            int id = jobRolesDao.createJobRole(jobRoleRequest, databaseConnector.getConnection());
 
             if (id == -1) {
                 throw new FailedToCreateJobRoleException();

@@ -71,6 +71,8 @@ public class JobRolesController {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
