@@ -4,14 +4,7 @@ import org.kainos.ea.cli.JobBandLevel;
 import org.kainos.ea.cli.JobFamilyGroup;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.cli.JobRoleRequest;
-import org.kainos.ea.client.FailedToCreateJobRoleException;
-import org.kainos.ea.client.FailedToDeleteJobRoleException;
-import org.kainos.ea.client.FailedToGetAllBandLevelsException;
-import org.kainos.ea.client.FailedToGetAllFamilyGroupsException;
-import org.kainos.ea.client.FailedToGetAllJobRolesException;
-import org.kainos.ea.client.FailedToGetJobRoleException;
-import org.kainos.ea.client.InvalidJobRoleException;
-import org.kainos.ea.client.JobRoleDoesNotExistException;
+import org.kainos.ea.client.*;
 import org.kainos.ea.core.JobRoleValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
@@ -119,6 +112,25 @@ public class JobRolesService {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             throw new FailedToDeleteJobRoleException();
+        }
+    }
+    public void updateJobRole(int id, JobRoleRequest jobRole) throws InvalidJobRoleException, JobRoleDoesNotExistException, FailedToUpdateJobRoleException {
+        try {
+            String validation = jobRoleValidator.isValidJobRole(jobRole);
+
+            if (validation != null) {
+                throw new InvalidJobRoleException(validation);
+            }
+            JobRole jobRoleToUpdate = jobRolesDao.getJobRoleById(databaseConnector.getConnection(), id);
+
+            if (jobRoleToUpdate == null) {
+                throw new JobRoleDoesNotExistException();
+            }
+            jobRolesDao.updateJobRole(id, jobRole, databaseConnector.getConnection());
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToUpdateJobRoleException();
         }
     }
 }

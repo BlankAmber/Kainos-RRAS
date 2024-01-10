@@ -7,6 +7,7 @@ import org.kainos.ea.cli.JobRoleRequest;
 import org.kainos.ea.util.DaoUtil;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -63,7 +64,6 @@ public class JobRolesDao {
         }
         return null;
     }
-
     public int createJobRole(JobRoleRequest jobRoleRequest, Connection conn) throws SQLException {
         String insertStatement = "INSERT INTO job_role "
                 + "(job_role_name, job_family_id, management_level_id, "
@@ -118,4 +118,20 @@ public class JobRolesDao {
         String statement = "DELETE FROM job_role j WHERE j.job_role_id = ?";
         DaoUtil.executeStatement(conn, statement, false, id);
     }
+    public void updateJobRole(int id, JobRoleRequest jobRole, Connection conn) throws SQLException {
+        String updateStatement = "UPDATE job_role SET"
+                + " job_role_name = ?, job_family_id = ?, management_level_id = ?,"
+                + " specification_summary = ?, sharepoint_link = ?, responsibilities = ?"
+                + " WHERE job_role_id = ?";
+        PreparedStatement s = conn.prepareStatement(updateStatement);
+        s.setString(1, jobRole.getJobRoleName());
+        s.setInt(2, jobRole.getJobFamilyGroupId());
+        s.setInt(3, jobRole.getJobBandLevelId());
+        s.setString(4, jobRole.getJobRoleLink());
+        s.setString(5, jobRole.getJobRoleSpec());
+        s.setString(6, jobRole.getJobResponsibilities());
+        s.setInt(7, id);
+        s.executeUpdate();
+    }
+
 }
