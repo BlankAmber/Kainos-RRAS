@@ -42,7 +42,7 @@ public class DatabaseConnector {
             if (!props.isValid()) {
                 throw new IllegalArgumentException(
                         "Environment variables must be set for "
-                        + "DB_USERNAME, DB_PASSWORD, DB_HOST, and DB_NAME."
+                                + "DB_USERNAME, DB_PASSWORD, DB_HOST, and DB_NAME."
                 );
             }
 
