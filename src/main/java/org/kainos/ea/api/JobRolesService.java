@@ -2,6 +2,7 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.JobResponsibilities;
 import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.JobRoleMatrix;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.client.FailedToGetJobRoleException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
@@ -44,4 +45,17 @@ public class JobRolesService {
             throw new FailedToGetJobRoleException();
         }
     }
+
+    public List<JobRoleMatrix> getJobRoleByCapability(String capability)
+            throws FailedToGetAllJobRolesException {
+        List<JobRoleMatrix> jobRolesList = null;
+        try {
+            jobRolesList = jobRolesDao.getJobRoleByCapability(databaseConnector.getConnection(), capability);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            throw new FailedToGetAllJobRolesException();
+        }
+        return jobRolesList;
+    }
+
 }

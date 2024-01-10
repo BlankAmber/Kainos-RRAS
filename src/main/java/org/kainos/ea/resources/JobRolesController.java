@@ -62,4 +62,22 @@ public class JobRolesController {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
+
+    @GET
+    @Path("/all-capability/{capability}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJobRoleByCapability(@HeaderParam("Authorisation") String authHeader,
+                                   @PathParam("capability") String capability) {
+        Response response = ControllerUtil.validAuthHeaderAtLeastEmployee(authHeader);
+        if (response != null) {
+            return response;
+        }
+
+        try {
+            return Response.ok(jobRolesService.getJobRoleByCapability(capability)).build();
+        } catch (FailedToGetAllJobRolesException e) {
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
+        }
+    }
 }
