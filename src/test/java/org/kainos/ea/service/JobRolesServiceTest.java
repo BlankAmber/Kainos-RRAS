@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.cli.JobResponsibilities;
 import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.client.FailedToDeleteJobRoleException;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.client.FailedToGetJobRoleException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
@@ -67,5 +68,16 @@ public class JobRolesServiceTest {
         Mockito.when(jobRolesDao.getJobRoleById(conn, 1)).thenReturn(jobRole);
 
         assertEquals(jobRole, jobRolesService.getJobRoleById(1));
+    }
+
+    @Test
+    @DisplayName("Test for deleting a specific job role")
+    void deleteJobRole_whenDaoReturnsVoid_shouldReturnVoid()
+            throws SQLException, JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        JobRole jobRole = Mockito.mock(JobRole.class);
+        Mockito.when(jobRolesDao.getJobRoleById(conn, 1)).thenReturn(jobRole);
+        Mockito.doNothing().when(jobRolesDao).deleteJobRoleById(conn, 1);
+        jobRolesService.deleteJobRoleById(1);
     }
 }
