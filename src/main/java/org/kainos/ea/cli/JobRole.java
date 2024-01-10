@@ -8,19 +8,52 @@ public class JobRole {
     private String jobRoleName;
     private String jobRoleSpec;
     private String jobRoleLink;
+    private String jobFamilyGroupName;
+    private String jobBandLevel;
+    private String jobRoleResponsibilities;
+
 
     @JsonCreator
     public JobRole(
             @JsonProperty("jobRoleId") int jobRoleId,
             @JsonProperty("jobRoleName") String jobRoleName,
+            @JsonProperty("jobFamilyGroupName") String jobFamilyGroupName,
+            @JsonProperty("jobBandLevel") String jobBandLevel,
+            @JsonProperty("jobRoleLink") String jobRoleLink,
             @JsonProperty("jobRoleSpec") String jobRoleSpec,
-            @JsonProperty("jobRoleLink") String jobRoleLink) {
+            @JsonProperty("jobRoleResponsibilities") String jobRoleResponsibilities) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
         this.jobRoleSpec = jobRoleSpec;
         this.jobRoleLink = jobRoleLink;
+        this.jobFamilyGroupName = jobFamilyGroupName;
+        this.jobBandLevel = jobBandLevel;
+        this.jobRoleResponsibilities = jobRoleResponsibilities;
     }
 
+    public String getJobFamilyGroupName() {
+        return jobFamilyGroupName;
+    }
+
+    public void setJobFamilyGroupName(String jobFamilyGroupName) {
+        this.jobFamilyGroupName = jobFamilyGroupName;
+    }
+
+    public String getJobBandLevel() {
+        return jobBandLevel;
+    }
+
+    public void setJobBandLevel(String jobBandLevel) {
+        this.jobBandLevel = jobBandLevel;
+    }
+
+    public String getJobRoleResponsibilities() {
+        return jobRoleResponsibilities;
+    }
+
+    public void setJobRoleResponsibilities(String jobRoleResponsibilities) {
+        this.jobRoleResponsibilities = jobRoleResponsibilities;
+    }
 
     public int getJobRoleId() {
         return jobRoleId;
