@@ -19,7 +19,7 @@ public class JobRoleRequest {
             @JsonProperty("management_level_id") int jobBandLevelId,
             @JsonProperty("specification_summary") String jobRoleSpec,
             @JsonProperty("sharepoint_link") String jobRoleLink,
-            @JsonProperty("responsibilities") String jobResponsibilities){
+            @JsonProperty("responsibilities") String jobResponsibilities) {
         this.setJobRoleName(jobRoleName);
         this.setJobFamilyGroupId(jobFamilyGroupId);
         this.setJobBandLevelId(jobBandLevelId);

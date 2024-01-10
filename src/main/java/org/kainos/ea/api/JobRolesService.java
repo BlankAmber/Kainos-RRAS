@@ -1,45 +1,56 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.*;
-
-import org.kainos.ea.client.*;
+import org.kainos.ea.cli.JobBandLevel;
+import org.kainos.ea.cli.JobFamilyGroup;
+import org.kainos.ea.cli.JobRole;
+import org.kainos.ea.cli.JobRoleRequest;
+import org.kainos.ea.client.FailedToCreateJobRoleException;
+import org.kainos.ea.client.FailedToDeleteJobRoleException;
+import org.kainos.ea.client.FailedToGetAllBandLevelsException;
+import org.kainos.ea.client.FailedToGetAllFamilyGroupsException;
+import org.kainos.ea.client.FailedToGetAllJobRolesException;
+import org.kainos.ea.client.FailedToGetJobRoleException;
+import org.kainos.ea.client.InvalidJobRoleException;
+import org.kainos.ea.client.JobRoleDoesNotExistException;
+import org.kainos.ea.core.JobRoleValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
-import org.kainos.ea.core.JobRoleValidator;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class JobRolesService {
+    private final JobRolesDao jobRolesDao;
+    private final DatabaseConnector databaseConnector;
+    private final JobRoleValidator jobRoleValidator;
 
-    public JobRolesDao jobRolesDao;
-
-    public DatabaseConnector databaseConnector;
-    JobRoleValidator jobRoleValidator = new JobRoleValidator();
-
-    public JobRolesService(JobRolesDao jobRolesDao, DatabaseConnector databaseConnector) {
+    public JobRolesService(
+            JobRolesDao jobRolesDao, DatabaseConnector databaseConnector,
+            JobRoleValidator jobRoleValidator) {
         this.jobRolesDao = jobRolesDao;
         this.databaseConnector = databaseConnector;
+        this.jobRoleValidator = jobRoleValidator;
     }
 
-    public List<JobResponsibilities> getAllJobRoles() throws FailedToGetAllJobRolesException {
-        List<JobResponsibilities> jobRolesList = null;
+    public List<JobRole> getAllJobRoles() throws FailedToGetAllJobRolesException {
+        List<JobRole> jobRolesList = null;
         try {
             jobRolesList = jobRolesDao.getAllJobRoles(databaseConnector.getConnection());
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-
             throw new FailedToGetAllJobRolesException();
         }
-
         return jobRolesList;
     }
 
-    public List<JobFamilyGroup> getAllFamilyGroups() throws FailedToGetAllFamilyGroupsException {
+    public List<JobFamilyGroup> getAllJobFamilyGroups() throws FailedToGetAllFamilyGroupsException {
         List<JobFamilyGroup> jobFamilyGroupList = null;
-        try{
-            jobFamilyGroupList = jobRolesDao.getAllJobFamilies(databaseConnector.getConnection());
+        try {
+            Connection conn = databaseConnector.getConnection();
+            jobFamilyGroupList = jobRolesDao.getAllJobFamilyGroups(conn);
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
 
             throw new FailedToGetAllFamilyGroupsException();
@@ -47,12 +58,12 @@ public class JobRolesService {
         return jobFamilyGroupList;
     }
 
-    public List<JobBandLevel> getAllBandLevels() throws FailedToGetAllBandLevelsException {
+    public List<JobBandLevel> getAllJobBandLevels() throws FailedToGetAllBandLevelsException {
         List<JobBandLevel> jobBandLevelList = null;
-        try{
+        try {
             jobBandLevelList = jobRolesDao.getAllJobBandLevels(databaseConnector.getConnection());
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
 
             throw new FailedToGetAllBandLevelsException();
@@ -61,26 +72,24 @@ public class JobRolesService {
     }
 
 
-    public JobRole getJobRolesById(int id)
-            throws FailedToGetAllJobRolesException, JobRoleDoesNotExistException, DatabaseConnectionException, SQLException {
+    public JobRole getJobRoleById(int id)
+            throws FailedToGetJobRoleException, JobRoleDoesNotExistException {
         try {
-            JobRole jobRole = jobRolesDao.getJobRolesById(id);
-
+            JobRole jobRole = jobRolesDao.getJobRoleById(databaseConnector.getConnection(), id);
             if (jobRole == null) {
                 throw new JobRoleDoesNotExistException();
             }
             return jobRole;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            throw new FailedToGetAllJobRolesException();
+            throw new FailedToGetJobRoleException();
         }
-
     }
 
-    public int createJobRole(JobRoleRequest jobRoleRequest) throws FailedToCreateJobRoleException, InvalidJobRoleException, SQLException {
+    public int createJobRole(JobRoleRequest jobRoleRequest)
+            throws FailedToCreateJobRoleException, InvalidJobRoleException {
         try {
             String validation = jobRoleValidator.isValidJobRole(jobRoleRequest);
-
             if (validation != null) {
                 throw new InvalidJobRoleException(validation);
             }
@@ -92,25 +101,24 @@ public class JobRolesService {
             }
 
             return id;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
 
             throw new FailedToCreateJobRoleException();
-        } catch (JobRoleLinkLengthException e) {
-            throw new RuntimeException(e);
-        } catch (JobRoleSpecLengthException e) {
-            throw new RuntimeException(e);
-        } catch (JobBandLevelIdException e) {
-            throw new RuntimeException(e);
-        } catch (JobRoleNameLengthException e) {
-            throw new RuntimeException(e);
-        } catch (JobFamilyGroupIdException e) {
-            throw new RuntimeException(e);
-        } catch (JobResponsibilitiesLengthException e) {
-            throw new RuntimeException(e);
         }
     }
 
-
+    public void deleteJobRoleById(int id)
+            throws FailedToDeleteJobRoleException, JobRoleDoesNotExistException {
+        try {
+            JobRole jobRole = jobRolesDao.getJobRoleById(databaseConnector.getConnection(), id);
+            if (jobRole == null) {
+                throw new JobRoleDoesNotExistException();
+            }
+            jobRolesDao.deleteJobRoleById(databaseConnector.getConnection(), id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            throw new FailedToDeleteJobRoleException();
+        }
+    }
 }

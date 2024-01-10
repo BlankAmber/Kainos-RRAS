@@ -1,7 +1,7 @@
 package org.kainos.ea.client;
 
-public class JobRoleDoesNotExistException extends Throwable{
+public class JobRoleDoesNotExistException extends Exception {
     public String getMessage() {
-        return "Failed to get  the job roles";
+        return "Job role does not exist";
     }
 }

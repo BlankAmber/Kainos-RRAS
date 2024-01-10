@@ -1,35 +1,34 @@
 package org.kainos.ea.cli;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobRole {
-
     private int jobRoleId;
     private String jobRoleName;
-
     private String jobRoleSpec;
     private String jobRoleLink;
-
     private String jobFamilyGroupName;
-    private String jobRoleBandLevel;
-    private String jobResponsibilities;
-
+    private String jobRoleResponsibilities;
     private String jobManagementLevel;
 
-
-    public JobRole() {
-        // Default constructor
-    }
-
-    public JobRole(int jobRoleId, String jobRoleName, String jobRoleSpec, String jobRoleLink, String jobResponsibilities, String jobRoleBandLevel, String jobManagementLevel) {
+    @JsonCreator
+    public JobRole(
+            @JsonProperty("jobRoleId") int jobRoleId,
+            @JsonProperty("jobRoleName") String jobRoleName,
+            @JsonProperty("jobFamilyGroupName") String jobFamilyGroupName,
+            @JsonProperty("jobManagementLevel") String jobManagementLevel,
+            @JsonProperty("jobRoleLink") String jobRoleLink,
+            @JsonProperty("jobRoleSpec") String jobRoleSpec,
+            @JsonProperty("jobRoleResponsibilities") String jobRoleResponsibilities) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
-        this.jobRoleSpec = jobRoleSpec;
-        this.jobRoleLink = jobRoleLink;
-        this.jobResponsibilities = jobResponsibilities;
-        this.jobRoleBandLevel = jobRoleBandLevel;
+        this.jobFamilyGroupName = jobFamilyGroupName;
         this.jobManagementLevel = jobManagementLevel;
+        this.jobRoleLink = jobRoleLink;
+        this.jobRoleSpec = jobRoleSpec;
+        this.jobRoleResponsibilities = jobRoleResponsibilities;
     }
-
 
     public int getJobRoleId() {
         return jobRoleId;
@@ -63,7 +62,6 @@ public class JobRole {
         this.jobRoleLink = jobRoleLink;
     }
 
-
     public String getJobFamilyGroupName() {
         return jobFamilyGroupName;
     }
@@ -71,19 +69,13 @@ public class JobRole {
     public void setJobFamilyGroupName(String jobFamilyGroupName) {
         this.jobFamilyGroupName = jobFamilyGroupName;
     }
-    public String getJobRoleBandLevel() {
-        return jobRoleBandLevel;
+
+    public String getJobRoleResponsibilities() {
+        return jobRoleResponsibilities;
     }
 
-    public void setJobRoleBandLevel(String jobRoleBandLevel) {
-        this.jobRoleBandLevel = jobRoleBandLevel;
-    }
-    public String getJobResponsibilities() {
-        return jobResponsibilities;
-    }
-
-    public void setJobResponsibilities(String jobResponsibilities) {
-        this.jobResponsibilities = jobResponsibilities;
+    public void setJobRoleResponsibilities(String jobRoleResponsibilities) {
+        this.jobRoleResponsibilities = jobRoleResponsibilities;
     }
 
     public String getJobManagementLevel() {

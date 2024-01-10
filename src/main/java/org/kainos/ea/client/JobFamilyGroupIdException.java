@@ -1,9 +1,8 @@
 package org.kainos.ea.client;
 
-public class JobFamilyGroupIdException extends Throwable{
+public class JobFamilyGroupIdException extends Exception {
     @Override
-    public String getMessage()
-    {
+    public String getMessage() {
         return "Invalid job family group";
     }
 }
