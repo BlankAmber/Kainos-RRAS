@@ -3,7 +3,6 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.ea.api.JobRolesService;
-import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.cli.JobRoleRequest;
 import org.kainos.ea.client.*;
 import org.kainos.ea.core.JobRoleValidator;
@@ -149,17 +148,12 @@ public class JobRolesController {
         }
         try {
             jobRolesService.updateJobRole(jobRoleId, jobRole);
-
             return Response.ok().build();
-        }
-        catch (FailedToUpdateJobRoleException e) {
+        } catch (FailedToUpdateJobRoleException e) {
             System.err.println(e.getMessage());
-
             return Response.serverError().build();
-        }
-        catch (JobRoleDoesNotExistException | InvalidJobRoleException e) {
+        } catch (JobRoleDoesNotExistException | InvalidJobRoleException e) {
             System.err.println(e.getMessage());
-
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }

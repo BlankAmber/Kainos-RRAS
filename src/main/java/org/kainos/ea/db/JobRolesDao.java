@@ -14,6 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRolesDao {
+    private static final int JOB_ROLE_NAME_INDEX = 1;
+    private static final int JOB_FAMILY_GROUP_ID_INDEX = 2;
+    private static final int JOB_BAND_LEVEL_ID_INDEX = 3;
+    private static final int JOB_ROLE_LINK_INDEX = 4;
+    private static final int JOB_ROLE_SPEC_INDEX = 5;
+    private static final int JOB_RESPONSIBILITIES_INDEX = 6;
+    private static final int ID_INDEX = 7;
     public List<JobRole> getAllJobRoles(Connection conn) throws SQLException {
         String statement = "SELECT j.job_role_id, j.job_role_name, jfg.job_family_group_name, "
                 + "ml.management_level_name, sharepoint_link, specification_summary, "
@@ -124,13 +131,13 @@ public class JobRolesDao {
                 + " specification_summary = ?, sharepoint_link = ?, responsibilities = ?"
                 + " WHERE job_role_id = ?";
         PreparedStatement s = conn.prepareStatement(updateStatement);
-        s.setString(1, jobRole.getJobRoleName());
-        s.setInt(2, jobRole.getJobFamilyGroupId());
-        s.setInt(3, jobRole.getJobBandLevelId());
-        s.setString(4, jobRole.getJobRoleLink());
-        s.setString(5, jobRole.getJobRoleSpec());
-        s.setString(6, jobRole.getJobResponsibilities());
-        s.setInt(7, id);
+        s.setString(JOB_ROLE_NAME_INDEX, jobRole.getJobRoleName());
+        s.setInt(JOB_FAMILY_GROUP_ID_INDEX, jobRole.getJobFamilyGroupId());
+        s.setInt(JOB_BAND_LEVEL_ID_INDEX, jobRole.getJobBandLevelId());
+        s.setString(JOB_ROLE_LINK_INDEX, jobRole.getJobRoleLink());
+        s.setString(JOB_ROLE_SPEC_INDEX, jobRole.getJobRoleSpec());
+        s.setString(JOB_RESPONSIBILITIES_INDEX, jobRole.getJobResponsibilities());
+        s.setInt(ID_INDEX, id);
         s.executeUpdate();
     }
 
