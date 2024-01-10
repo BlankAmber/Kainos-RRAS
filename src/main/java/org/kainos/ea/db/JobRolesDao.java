@@ -39,7 +39,8 @@ public class JobRolesDao {
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(
                 "SELECT j.job_role_id, j.job_role_name, jfg.job_family_group_name, "
-                + "ml.management_level_name, j.sharepoint_link, j.specification_summary, j.responsibilities "
+                + "ml.management_level_name, j.sharepoint_link, "
+                + "j.specification_summary, j.responsibilities "
                 + "FROM job_role j "
                 + "JOIN job_family jf ON j.job_family_id = jf.job_family_id "
                 + "JOIN job_family_group jfg ON jf.job_family_group_id = jfg.job_family_group_id "
