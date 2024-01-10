@@ -79,7 +79,7 @@ public class JobRolesService {
 
     public int createJobRole(JobRoleRequest jobRoleRequest) throws FailedToCreateJobRoleException, InvalidJobRoleException {
         try {
-            String validation = String.valueOf(jobRoleValidator.isValidJobRole(jobRoleRequest));
+            String validation = jobRoleValidator.isValidJobRole(jobRoleRequest);
 
             if (validation != null) {
                 throw new InvalidJobRoleException(validation);
@@ -110,8 +110,6 @@ public class JobRolesService {
         } catch (JobResponsibilitiesLengthException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
 

@@ -58,17 +58,19 @@ public class JobRolesController {
     @POST
     @Path("/job-role")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createJobRole(JobRoleRequest jobRoleRequest) throws JobRoleLinkLengthException, JobRoleSpecLengthException, JobBandLevelIdException, JobRoleNameLengthException, JobFamilyGroupIdException, JobResponsibilitiesLengthException {
-        if (jobRoleValidator.isValidJobRole(jobRoleRequest)) {
-            try {
-                int id = jobRolesService.createJobRole(jobRoleRequest);
-                return Response.status(HttpStatus.CREATED_201).entity(id).build();
-            } catch (Exception | FailedToCreateJobRoleException | InvalidJobRoleException e) {
-                System.out.println(e);
-                return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
-            }
-        } else {
-            return Response.status(HttpStatus.BAD_REQUEST_400).build();
+    public Response createJobRole(JobRoleRequest jobRoleRequest) {
+        try {
+            return Response.ok(jobRolesService.createJobRole(jobRoleRequest)).build();
+        }
+        catch (FailedToCreateJobRoleException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+        catch (InvalidJobRoleException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
