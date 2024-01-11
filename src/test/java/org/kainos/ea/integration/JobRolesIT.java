@@ -74,13 +74,13 @@ public class JobRolesIT {
                 .readEntity(String.class);
 
         Response response =
-                APP.client().target("http://localhost:8080/api/all-job-roles/1")
+                APP.client().target("http://localhost:8080/api/all-job-roles/3")
                         .request()
                         .header("Authorisation", "Bearer " + jwt)
                         .get();
 
         Assertions.assertEquals(200, response.getStatus());
-        Assertions.assertEquals(1, response.readEntity(JobRole.class).getJobRoleId());
+        Assertions.assertEquals(3, response.readEntity(JobRole.class).getJobRoleId());
     }
 
     @Test

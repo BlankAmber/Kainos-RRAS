@@ -4,26 +4,29 @@ import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.ea.api.JobRolesService;
 import org.kainos.ea.cli.JobRoleRequest;
-import org.kainos.ea.client.FailedToCreateJobRoleException;
-import org.kainos.ea.client.FailedToDeleteJobRoleException;
-import org.kainos.ea.client.FailedToGetAllBandLevelsException;
-import org.kainos.ea.client.FailedToGetAllFamilyGroupsException;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
-import org.kainos.ea.client.FailedToGetJobRoleException;
-import org.kainos.ea.client.InvalidJobRoleException;
+import org.kainos.ea.client.FailedToGetAllFamilyGroupsException;
+import org.kainos.ea.client.FailedToGetAllBandLevelsException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
+import org.kainos.ea.client.FailedToGetJobRoleException;
+import org.kainos.ea.client.FailedToCreateJobRoleException;
+import org.kainos.ea.client.InvalidJobRoleException;
+import org.kainos.ea.client.FailedToDeleteJobRoleException;
+import org.kainos.ea.client.FailedToUpdateJobRoleException;
 import org.kainos.ea.core.JobRoleValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 import org.kainos.ea.util.ControllerUtil;
 
-import javax.ws.rs.DELETE;
+
+import javax.ws.rs.Path;
 import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -148,6 +151,26 @@ public class JobRolesController {
         } catch (JobRoleDoesNotExistException e) {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+    @PUT
+    @Path("/update-job-role/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateJobRole(@HeaderParam("Authorisation") String authHeader,
+                                        @PathParam("id") int jobRoleId, JobRoleRequest jobRole) {
+        Response response = ControllerUtil.validAuthHeaderIsAdmin(authHeader);
+        if (response != null) {
+            return response;
+        }
+        try {
+            jobRolesService.updateJobRole(jobRoleId, jobRole);
+            return Response.ok().build();
+        } catch (FailedToUpdateJobRoleException e) {
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
+        } catch (JobRoleDoesNotExistException | InvalidJobRoleException e) {
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 }

@@ -7,12 +7,20 @@ import org.kainos.ea.cli.JobRoleRequest;
 import org.kainos.ea.util.DaoUtil;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobRolesDao {
+    private static final int JOB_ROLE_NAME_INDEX = 1;
+    private static final int JOB_FAMILY_GROUP_ID_INDEX = 2;
+    private static final int JOB_BAND_LEVEL_ID_INDEX = 3;
+    private static final int JOB_ROLE_LINK_INDEX = 4;
+    private static final int JOB_ROLE_SPEC_INDEX = 5;
+    private static final int JOB_RESPONSIBILITIES_INDEX = 6;
+    private static final int ID_INDEX = 7;
     public List<JobRole> getAllJobRoles(Connection conn) throws SQLException {
         String statement = "SELECT j.job_role_id, j.job_role_name, jfg.job_family_group_name, "
                 + "ml.management_level_name, sharepoint_link, specification_summary, "
@@ -20,7 +28,8 @@ public class JobRolesDao {
                 + "FROM job_role j "
                 + "JOIN job_family jf ON j.job_family_id = jf.job_family_id "
                 + "JOIN job_family_group jfg ON jf.job_family_group_id = jfg.job_family_group_id "
-                + "JOIN management_level ml ON j.management_level_id = ml.management_level_id";
+                + "JOIN management_level ml ON j.management_level_id = ml.management_level_id "
+                + "ORDER BY job_role_id";
         ResultSet resultSet = DaoUtil.executeStatement(conn, statement, true);
 
         List<JobRole> jobRolesList = new ArrayList<>();
@@ -63,7 +72,6 @@ public class JobRolesDao {
         }
         return null;
     }
-
     public int createJobRole(JobRoleRequest jobRoleRequest, Connection conn) throws SQLException {
         String insertStatement = "INSERT INTO job_role "
                 + "(job_role_name, job_family_id, management_level_id, "
@@ -118,4 +126,20 @@ public class JobRolesDao {
         String statement = "DELETE FROM job_role j WHERE j.job_role_id = ?";
         DaoUtil.executeStatement(conn, statement, false, id);
     }
+    public void updateJobRole(int id, JobRoleRequest jobRole, Connection conn) throws SQLException {
+        String updateStatement = "UPDATE job_role SET"
+                + " job_role_name = ?, job_family_id = ?, management_level_id = ?,"
+                + " specification_summary = ?, sharepoint_link = ?, responsibilities = ?"
+                + " WHERE job_role_id = ?";
+        PreparedStatement s = conn.prepareStatement(updateStatement);
+        s.setString(JOB_ROLE_NAME_INDEX, jobRole.getJobRoleName());
+        s.setInt(JOB_FAMILY_GROUP_ID_INDEX, jobRole.getJobFamilyGroupId());
+        s.setInt(JOB_BAND_LEVEL_ID_INDEX, jobRole.getJobBandLevelId());
+        s.setString(JOB_ROLE_LINK_INDEX, jobRole.getJobRoleLink());
+        s.setString(JOB_ROLE_SPEC_INDEX, jobRole.getJobRoleSpec());
+        s.setString(JOB_RESPONSIBILITIES_INDEX, jobRole.getJobResponsibilities());
+        s.setInt(ID_INDEX, id);
+        s.executeUpdate();
+    }
+
 }
