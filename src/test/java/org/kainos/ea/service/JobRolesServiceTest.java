@@ -162,7 +162,15 @@ public class JobRolesServiceTest {
                 "updated link",
                 "updated responsibilities"
         );
-        JobRole jobRoleToUpdate = new JobRole();
+        JobRole jobRoleToUpdate = new JobRole(
+                1,
+                "Placeholder",
+                "Placeholder",
+                "Placeholder",
+                "Placeholder",
+                "Placeholder",
+                "Placeholder"
+        );
 
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRolesDao.getJobRoleById(conn, id)).thenReturn(jobRoleToUpdate);
