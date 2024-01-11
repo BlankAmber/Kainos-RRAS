@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.ea.api.JobRolesService;
-import org.kainos.ea.cli.JobBandLevel;
+import org.kainos.ea.cli.JobResponsibilities;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.client.FailedToGetJobRoleException;
@@ -35,12 +35,11 @@ public class JobRolesServiceTest {
     @DisplayName("Test successful returning job roles")
     void getJobRoles_whenDaoReturnsJobRoles_shouldReturnJobRoles()
             throws SQLException, FailedToGetAllJobRolesException {
-        List<JobBandLevel> listOfJobRoles = Arrays.asList(
-                Mockito.mock(JobBandLevel.class),
-                Mockito.mock(JobBandLevel.class),
-                Mockito.mock(JobBandLevel.class),
-                Mockito.mock(JobBandLevel.class)
-
+        List<JobResponsibilities> listOfJobRoles = Arrays.asList(
+                Mockito.mock(JobResponsibilities.class),
+                Mockito.mock(JobResponsibilities.class),
+                Mockito.mock(JobResponsibilities.class),
+                Mockito.mock(JobResponsibilities.class)
         );
 
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);

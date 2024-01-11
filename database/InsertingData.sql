@@ -667,3 +667,130 @@ UPDATE job_role SET management_level_id = 4 WHERE job_role_id = 81;
 UPDATE job_role SET management_level_id = 5 WHERE job_role_id = 82;
 UPDATE job_role SET management_level_id = 6 WHERE job_role_id = 83;
 UPDATE job_role SET management_level_id = 7 WHERE job_role_id = 84;
+
+UPDATE job_role
+SET responsibilities = 'Identifying, mentoring and coaching talent within the technical capabilities, supporting a culture of wellbeing and inclusion
+Developing future technology talent aligned with the needs of the business in terms of strategic development and succession planning
+Creating environments for technical talent to thrive and achieve ambitious goals
+Conducting strategic analysis and make recommendations that could influence the business strategy over medium- and long-term horizons
+Work with Innovation and business development teams to qualify and evidence strategic analysis
+Managing the technology budget and making investments aligned to the business strategy
+Review, question, and support development of Sector/Practice technology strategy
+Uses cross cutting Sector/ Practice insights to identify business development opportunities where existing or future technologies can assist in solving existing or future business or client’s problems.
+Inspiring potential and existing clients and employees within Kainos markets and driving change where necessary
+Engaging with senior clients as a senior technical adviser. Establishing and developing trusted relationships that position Kainos as their technology partner of choice where strategic customer engagement is required'
+WHERE job_role_id = 1;
+
+
+UPDATE job_role
+SET responsibilities = 'Collaborate with the Innovation Lead and Director of Innovation to shape the companys strategy for innovation and connect strategy with tactical implementation. 
+Assume a leadership position in driving the approaches and tooling required for dynamic R&D projects.
+Active engagement with the wider technology community, including conferences, meetups and events to continue to demonstrate thought leadership in public forums.
+Identifying and implementing process improvements to improve the effectiveness of the innovation team. 
+Taking responsibility for the Innovation Team’s internal and external communications strategy to share knowledge and demonstrate leadership both internally and in the public domain. 
+Coordinating with other parts of the business, including presenting to internal and external customers. 
+You’ll manage, coach and develop a number of staff, with a focus on managing employee performance and assisting in their career development.'
+WHERE job_role_id = 2;
+
+
+UPDATE job_role
+SET responsibilities = 'As an Apprentice Software Engineer with Kainos, you will work on projects where you can make a real difference to people’s lives – the lives of people you know. 
+Extensive training to set you off on the right foot, you will quickly work as a part of a team in developing solutions within our real projects, learning all about our development languages, projects and technologies. 
+You will be fully supported by experienced colleagues in the team as well as an experienced mentor, who will provide training and mentoring throughout your studies. 
+You’ll also get experience across a wide range of teams and projects, with built-in rotations to help you learn and work out which element of Software Engineering suits your interests and skills best. 
+You’ll have a genuine enthusiasm for anything “tech” and be able to really show this, both within and outside of your studies. 
+You’ll be able to show us your teamworking skills – everyone in Kainos works in tight-knit teams, so this is crucial. 
+Our developers are creative – you’ll be able to show us your skills for coming up with new ideas and ways of doing things, how you’ve solved problems and looked at things differently.'
+WHERE job_role_id = 3;
+
+UPDATE job_role
+SET responsibilities = 'Contribute to developing high quality solutions which impact the lives of users worldwide.
+You’ll work as part of a team to solve problems and produce innovative software solutions.
+Learn about new technologies and approaches, with talented colleagues who will help you learn, develop and grow.
+Based in our Kainos office and often on our customer sites, you will work on a project teams to learn how to develop and unit test developing and unit testing straightforward or low complexity components, and then moving on to more complex elements as you increase your knowledge.
+Work with other developers in working through designs and user stories and to produce real development solutions
+Will be fully supported by experienced colleagues in the team to follow designs, and then progress to assist in any other aspect of the project life-cycle under supervision
+Develop excellent technical, team-working and Agile project experience'
+WHERE job_role_id = 4;
+
+UPDATE job_role
+SET responsibilities = 'Providing day-to-day technical support to internal and external customer.
+Proactively taking ownership for incidents in areas of expertise and designated responsibility participating fully in the incident management lifecycle. 
+Liaising with customers as required, presenting a professional image of Kainos, escalating, and reporting back to the Service Manager/Lead consultant. 
+Configuring and solving issues within the relevant applications. 
+Taking the lead in providing a support service to clients ensuring compliance with Service Level Agreements. 
+Will have an awareness of overall client business requirements and impact on Kainos and client commercials. 
+Delivering within commercial constraints that apply to the support agreement. 
+Producing technical documentation and procedures as necessary within the relevant applications. 
+Ensuring that deliverables are consistent with Kainos and/or client policies, strategies and constraints. 
+Applying all relevant standards and procedures to their own work. 
+Taking responsibility for team projects as required. 
+Leading by example in both technical and non-technical aspects of the job. 
+Recognising and raising business opportunities. 
+Maintaining a current knowledge of relevant technology developments and actively shares knowledge. 
+Advising customers on the technical, operational and business impacts of processes, incidents and RFCs. 
+Involving development/infrastructure team/third parties as appropriate. 
+Contributing to service review meetings. 
+Complying with all confidentiality and non-disclosure policies and/or agreements and ensures security of information at all times.'
+WHERE job_role_id = 5;
+
+UPDATE job_role
+SET responsibilities = 'Good communication skills, with the ability to communicate issues to other technical people, and sometimes to non-technical people.
+Experience using version control systems such as git and with modern practices such as Continuous Integration / Continuous Delivery.
+Experience with Typescript, Node.js, Express.js, npm/scripts and front-end build tools.
+Understanding of accessibility best practices and experience creating accessible user interfaces.
+Experience mentoring team members through knowledge-sharing and constructively contributing to code reviews and documentation.
+Experience implementing and maintaining design systems or UI libraries.'
+WHERE job_role_id = 6;
+
+UPDATE job_role
+SET responsibilities = 'Experience of building and testing modern software applications
+Experience of applying common design principles and patterns
+Experience of working in a collaborative team environment
+You’re flexible and overcome obstacles to get the job done to achieve personal, team, and business goals.
+You actively look for better ways to do things using your imagination to find fresh solutions to complex problems.
+You are always constructive when giving or receiving feedback, being transparent and truthful when dealing with others.
+You treat others as you would like to be treated being encouraging, accepting and supportive to everyone you deal with.
+You share information, knowledge and experience, understanding the mutual benefits of team working.'
+WHERE job_role_id = 7;
+
+
+UPDATE job_role
+SET responsibilities = 'Providing day-to-day technical support to internal and external customer.
+Proactively taking ownership for incidents in areas of expertise and designated responsibility participating fully in the incident management lifecycle. 
+Liaising with customers as required, presenting a professional image of Kainos, escalating, and reporting back to the Service Manager/Lead consultant. 
+Configuring and solving issues within the relevant applications. 
+Taking the lead in providing a support service to clients ensuring compliance with Service Level Agreements. 
+Will have an awareness of overall client business requirements and impact on Kainos and client commercials. 
+Delivering within commercial constraints that apply to the support agreement. 
+Producing technical documentation and procedures as necessary within the relevant applications. 
+Ensuring that deliverables are consistent with Kainos and/or client policies, strategies and constraints. 
+Applying all relevant standards and procedures to their own work. 
+Taking responsibility for team projects as required. 
+Leading by example in both technical and non-technical aspects of the job. 
+Recognising and raising business opportunities. 
+Maintaining a current knowledge of relevant technology developments and actively shares knowledge. 
+Advising customers on the technical, operational and business impacts of processes, incidents and RFCs. 
+Involving development/infrastructure team/third parties as appropriate. 
+Contributing to service review meetings. 
+Complying with all confidentiality and non-disclosure policies and/or agreements and ensures security of information at all times.'
+WHERE job_role_id = 8;
+
+UPDATE job_role
+SET responsibilities = 'Experience crafting quality, reusable front-end code with semantic HTML, CSS3/Sass, and object-oriented JavaScript/ES 6.
+Experience building and testing modern data-driven front-end applications, consuming APIs, and delivering high quality user experiences using modern JavaScript frameworks such as Angular, Vue, React or similar.
+Strong experience with browser dev tools; troubleshooting and debugging in test and live environments.
+Knowledge of testing principles; experience writing unit tests for front-end components, integration tests and using modern testing tools.
+Experience using version control systems such as git.
+Experience contributing to technical discussions and direction in a collaborative team environment; including architecture, estimation, product planning and user story/requirement creation.
+Able to make and communicate informed technical decisions by critically balancing user needs and technical/commercial constraints.
+We are passionate about developing people – a demonstrated ability in managing, coaching and developing people in your team and the wider community.'
+WHERE job_role_id = 9;
+
+UPDATE job_role
+SET responsibilities = 'Proficient in designing, building, testing and maintaining modern software applications.
+Experience of applying development best practices and patterns in relation to security, scalability and performance.
+Contributing to technical decisions and direction in a collaborative team environment, including architecture, estimation, product planning, user story/requirement creation.
+Experience of design and development across multiple layers of an application.
+Mentoring junior team members.'
+WHERE job_role_id = 10;
