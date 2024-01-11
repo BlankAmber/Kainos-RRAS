@@ -8,7 +8,15 @@ import org.kainos.ea.cli.JobBandLevel;
 import org.kainos.ea.cli.JobFamilyGroup;
 import org.kainos.ea.cli.JobRole;
 import org.kainos.ea.cli.JobRoleRequest;
-import org.kainos.ea.client.*;
+import org.kainos.ea.client.FailedToUpdateJobRoleException;
+import org.kainos.ea.client.FailedToGetAllJobRolesException;
+import org.kainos.ea.client.JobRoleDoesNotExistException;
+import org.kainos.ea.client.FailedToGetJobRoleException;
+import org.kainos.ea.client.FailedToDeleteJobRoleException;
+import org.kainos.ea.client.FailedToGetAllFamilyGroupsException;
+import org.kainos.ea.client.FailedToGetAllBandLevelsException;
+import org.kainos.ea.client.InvalidJobRoleException;
+import org.kainos.ea.client.FailedToCreateJobRoleException;
 import org.kainos.ea.core.JobRoleValidator;
 import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
@@ -20,7 +28,9 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(MockitoExtension.class)
 public class JobRolesServiceTest {
@@ -142,7 +152,7 @@ public class JobRolesServiceTest {
                 () -> jobRolesService.createJobRole(jobRoleRequest));
     }
     @Test
-    void updateJobRole_whenDaoUpdatesJobRole_shouldNotThrowException() throws SQLException, InvalidJobRoleException, JobRoleDoesNotExistException, FailedToUpdateJobRoleException {
+    void updateJobRole_whenDaoUpdatesJobRole_shouldNotThrowException() throws SQLException {
         int id = 1;
         JobRoleRequest jobRoleRequest = new JobRoleRequest(
                 "Updated Test Engineer",
@@ -162,7 +172,8 @@ public class JobRolesServiceTest {
     }
 
     @Test
-    void updateJobRole_whenDaoThrowsSqlException_shouldThrowFailedToUpdateJobRoleException() throws SQLException {
+    void updateJobRole_whenDaoThrowsSqlException_shouldThrowFailedToUpdateJobRoleException()
+            throws SQLException {
         int id = 1;
         JobRoleRequest jobRoleRequest = new JobRoleRequest(
                 "Updated Test Engineer",
