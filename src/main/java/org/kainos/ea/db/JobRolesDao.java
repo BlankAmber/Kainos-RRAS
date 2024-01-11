@@ -58,4 +58,9 @@ public class JobRolesDao {
         }
         return null;
     }
+
+    public void deleteJobRoleById(Connection conn, int id) throws SQLException {
+        String statement = "DELETE FROM job_role j WHERE j.job_role_id = ?";
+        DaoUtil.executeStatement(conn, statement, false, id);
+    }
 }

@@ -3,6 +3,7 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.ea.api.JobRolesService;
+import org.kainos.ea.client.FailedToDeleteJobRoleException;
 import org.kainos.ea.client.FailedToGetAllJobRolesException;
 import org.kainos.ea.client.FailedToGetJobRoleException;
 import org.kainos.ea.client.JobRoleDoesNotExistException;
@@ -10,6 +11,7 @@ import org.kainos.ea.db.DatabaseConnector;
 import org.kainos.ea.db.JobRolesDao;
 import org.kainos.ea.util.ControllerUtil;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
@@ -55,6 +57,28 @@ public class JobRolesController {
             return Response.status(HttpStatus.OK_200)
                     .entity(jobRolesService.getJobRoleById(jobRoleId)).build();
         } catch (FailedToGetJobRoleException e)  {
+            System.err.println(e.getMessage());
+            return Response.serverError().build();
+        } catch (JobRoleDoesNotExistException e) {
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("/all-job-roles/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteJobRoleById(@HeaderParam("Authorisation") String authHeader,
+                                      @PathParam("id") int jobRoleId) {
+        Response response = ControllerUtil.validAuthHeaderIsAdmin(authHeader);
+        if (response != null) {
+            return response;
+        }
+
+        try {
+            jobRolesService.deleteJobRoleById(jobRoleId);
+            return Response.status(HttpStatus.OK_200).build();
+        } catch (FailedToDeleteJobRoleException e)  {
             System.err.println(e.getMessage());
             return Response.serverError().build();
         } catch (JobRoleDoesNotExistException e) {

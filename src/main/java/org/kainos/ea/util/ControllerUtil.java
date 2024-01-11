@@ -22,15 +22,20 @@ public final class ControllerUtil {
             switch (roleId) {
                 case ADMIN:
                     if (!JWTUtil.isAdmin(jwt)) {
+                        System.out.println("Forbidden response received when verifying "
+                                + "if user is an admin!");
                         return Response.status(Response.Status.FORBIDDEN).build();
                     }
                     break;
                 case EMPLOYEE:
                     if (!JWTUtil.isAtLeastEmployee(jwt)) {
+                        System.out.println("Forbidden response received when verifying "
+                                + "if user is at least an employee!");
                         return Response.status(Response.Status.FORBIDDEN).build();
                     }
                     break;
                 default:
+                    System.out.println("Invalid role specified when validating auth header!");
                     return Response.status(Response.Status.BAD_REQUEST)
                             .entity("Invalid role specified").build();
             }
