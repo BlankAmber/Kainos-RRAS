@@ -149,4 +149,34 @@ public class JobRolesIT {
 
         assertFalse(response.isEmpty());
     }
+    @Test
+    @DisplayName("Integration test for updating individual job roles")
+    void putJobRole_shouldUpdateJobRole() {
+        String email = System.getenv("TEST_ADMIN_ACCOUNT_EMAIL");
+        String password = System.getenv("TEST_ADMIN_ACCOUNT_PASSWORD");
+        Login login = new Login(email, password);
+        String jwt = APP.client().target("http://localhost:8080/api/login")
+                .request()
+                .post(Entity.entity(login, MediaType.APPLICATION_JSON_TYPE))
+                .readEntity(String.class);
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Updated Test Engineer",
+                2,
+                3,
+                "updated job spec",
+                "updated link",
+                "updated responsibilities"
+        );
+
+        Response response = APP.client().target("http://localhost:8080/api/job-role/84")
+                .request()
+                .header("Authorisation", "Bearer " + jwt)
+                .put(Entity.entity(jobRoleRequest, MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
+        JobRoleRequest updatedJobRole = response.readEntity(JobRoleRequest.class);
+        Assertions.assertEquals(jobRoleRequest, updatedJobRole);
+    }
 }

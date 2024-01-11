@@ -30,6 +30,10 @@ public class JobRole {
         this.jobRoleResponsibilities = jobRoleResponsibilities;
     }
 
+    public JobRole() {
+
+    }
+
     public int getJobRoleId() {
         return jobRoleId;
     }
