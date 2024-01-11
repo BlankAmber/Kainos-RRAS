@@ -156,7 +156,7 @@ public class JobRolesController {
     @PUT
     @Path("/update-job-role/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateSalesEmployee(@HeaderParam("Authorisation") String authHeader,
+    public Response updateJobRole(@HeaderParam("Authorisation") String authHeader,
                                         @PathParam("id") int jobRoleId, JobRoleRequest jobRole) {
         Response response = ControllerUtil.validAuthHeaderIsAdmin(authHeader);
         if (response != null) {
