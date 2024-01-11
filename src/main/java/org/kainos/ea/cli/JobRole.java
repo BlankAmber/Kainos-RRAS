@@ -9,49 +9,24 @@ public class JobRole {
     private String jobRoleSpec;
     private String jobRoleLink;
     private String jobFamilyGroupName;
-    private String jobBandLevel;
     private String jobRoleResponsibilities;
-
+    private String jobManagementLevel;
 
     @JsonCreator
     public JobRole(
             @JsonProperty("jobRoleId") int jobRoleId,
             @JsonProperty("jobRoleName") String jobRoleName,
             @JsonProperty("jobFamilyGroupName") String jobFamilyGroupName,
-            @JsonProperty("jobBandLevel") String jobBandLevel,
+            @JsonProperty("jobManagementLevel") String jobManagementLevel,
             @JsonProperty("jobRoleLink") String jobRoleLink,
             @JsonProperty("jobRoleSpec") String jobRoleSpec,
             @JsonProperty("jobRoleResponsibilities") String jobRoleResponsibilities) {
         this.jobRoleId = jobRoleId;
         this.jobRoleName = jobRoleName;
-        this.jobRoleSpec = jobRoleSpec;
+        this.jobFamilyGroupName = jobFamilyGroupName;
+        this.jobManagementLevel = jobManagementLevel;
         this.jobRoleLink = jobRoleLink;
-        this.jobFamilyGroupName = jobFamilyGroupName;
-        this.jobBandLevel = jobBandLevel;
-        this.jobRoleResponsibilities = jobRoleResponsibilities;
-    }
-
-    public String getJobFamilyGroupName() {
-        return jobFamilyGroupName;
-    }
-
-    public void setJobFamilyGroupName(String jobFamilyGroupName) {
-        this.jobFamilyGroupName = jobFamilyGroupName;
-    }
-
-    public String getJobBandLevel() {
-        return jobBandLevel;
-    }
-
-    public void setJobBandLevel(String jobBandLevel) {
-        this.jobBandLevel = jobBandLevel;
-    }
-
-    public String getJobRoleResponsibilities() {
-        return jobRoleResponsibilities;
-    }
-
-    public void setJobRoleResponsibilities(String jobRoleResponsibilities) {
+        this.jobRoleSpec = jobRoleSpec;
         this.jobRoleResponsibilities = jobRoleResponsibilities;
     }
 
@@ -85,5 +60,29 @@ public class JobRole {
 
     public void setJobRoleLink(String jobRoleLink) {
         this.jobRoleLink = jobRoleLink;
+    }
+
+    public String getJobFamilyGroupName() {
+        return jobFamilyGroupName;
+    }
+
+    public void setJobFamilyGroupName(String jobFamilyGroupName) {
+        this.jobFamilyGroupName = jobFamilyGroupName;
+    }
+
+    public String getJobRoleResponsibilities() {
+        return jobRoleResponsibilities;
+    }
+
+    public void setJobRoleResponsibilities(String jobRoleResponsibilities) {
+        this.jobRoleResponsibilities = jobRoleResponsibilities;
+    }
+
+    public String getJobManagementLevel() {
+        return jobManagementLevel;
+    }
+
+    public void setJobManagementLevel(String jobManagementLevel) {
+        this.jobManagementLevel = jobManagementLevel;
     }
 }

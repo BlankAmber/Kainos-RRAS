@@ -4,45 +4,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobBandLevel {
-    private int jobRoleId;
-    private String jobRoleName;
-    private String jobFamilyGroupName;
+    private int jobBandLevelId;
     private String jobBandLevel;
 
     @JsonCreator
     public JobBandLevel(
-            @JsonProperty("jobRoleId") int jobRoleId,
-            @JsonProperty("jobRoleName") String jobRoleName,
-            @JsonProperty("jobFamilyGroupName") String jobFamilyGroupName,
+            @JsonProperty("jobBandLevelId") int jobBandLevelId,
             @JsonProperty("jobBandLevel") String jobBandLevel) {
-        this.jobRoleId = jobRoleId;
-        this.jobRoleName = jobRoleName;
-        this.jobFamilyGroupName = jobFamilyGroupName;
+        this.jobBandLevelId = jobBandLevelId;
         this.jobBandLevel = jobBandLevel;
     }
 
-    public int getJobRoleId() {
-        return jobRoleId;
+    public int getJobBandLevelId() {
+        return jobBandLevelId;
     }
 
-    public void setJobRoleId(int jobRoleId) {
-        this.jobRoleId = jobRoleId;
-    }
-
-    public String getJobRoleName() {
-        return jobRoleName;
-    }
-
-    public void setJobRoleName(String jobRoleName) {
-        this.jobRoleName = jobRoleName;
-    }
-
-    public String getJobFamilyGroupName() {
-        return jobFamilyGroupName;
-    }
-
-    public void setJobFamilyGroupName(String jobFamilyGroupName) {
-        this.jobFamilyGroupName = jobFamilyGroupName;
+    public void setJobBandLevelId(int jobBandLevelId) {
+        this.jobBandLevelId = jobBandLevelId;
     }
 
     public String getJobBandLevel() {

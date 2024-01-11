@@ -29,6 +29,6 @@ public final class DaoUtil {
             return preparedStatement.executeQuery();
         }
         preparedStatement.executeUpdate();
-        return null;
+        return preparedStatement.getGeneratedKeys();
     }
 }
