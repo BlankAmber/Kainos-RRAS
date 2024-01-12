@@ -9,16 +9,38 @@ import org.kainos.ea.client.FailedToValidateLoginException;
 import org.kainos.ea.db.AuthDao;
 import org.kainos.ea.db.DatabaseConnector;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Api("RRAS Auth API")
 @Path("/api")
 public class AuthController {
     private final AuthService authService = new AuthService(new AuthDao(), new DatabaseConnector());
+
+    private static final int DELAY_SECONDS = 10;
+    private static final int PERIOD_SECONDS = 10;
+
+    public AuthController() {
+        // Every 10 seconds the database is pinged.
+        // This is a workaround to prevent the problem where if the backend is idle
+        // for too long then it stops working temporarily.
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(this::ping, DELAY_SECONDS, PERIOD_SECONDS, TimeUnit.SECONDS);
+    }
+
+    @GET
+    @Path("/ping")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response ping() {
+        return Response.ok(authService.ping()).build();
+    }
 
     @POST
     @Path("/login")
