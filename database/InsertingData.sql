@@ -794,3 +794,8 @@ Contributing to technical decisions and direction in a collaborative team enviro
 Experience of design and development across multiple layers of an application.
 Mentoring junior team members.'
 WHERE job_role_id = 10;
+
+UPDATE job_role
+    SET job_family_id = ROUND(RAND() * 68 + 1, 0),
+        management_level_id = ROUND(RAND() * 7 + 1, 0)
+    WHERE job_role_id >= 85 AND job_role_id <= 348;
