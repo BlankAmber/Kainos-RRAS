@@ -29,7 +29,9 @@ public class AuthController {
         // This is a workaround to prevent the problem where if the backend is idle
         // for too long then it stops working temporarily.
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(this::ping, 10, 10, TimeUnit.SECONDS);
+        int delaySeconds = 10;
+        int periodSeconds = 10;
+        scheduler.scheduleAtFixedRate(this::ping, delaySeconds, periodSeconds, TimeUnit.SECONDS);
     }
 
     @GET
