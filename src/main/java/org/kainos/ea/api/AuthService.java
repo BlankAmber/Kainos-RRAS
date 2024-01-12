@@ -19,6 +19,16 @@ public class AuthService {
         this.databaseConnector = databaseConnector;
     }
 
+    public boolean ping() {
+        try {
+            Connection conn = databaseConnector.getConnection();
+            return authDao.ping(conn);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
     public String login(Login login)
             throws FailedToGenerateTokenException,
             FailedToValidateLoginException, FailedToLoginException {
