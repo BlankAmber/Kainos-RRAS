@@ -15,6 +15,17 @@ import java.util.Date;
 public class AuthDao {
     private static final int TOKEN_EXPIRY_NUM_HOURS_AFTER_LOGIN = 8;
 
+    public boolean ping(Connection conn) {
+        String statement = "SELECT 1";
+        try {
+            DaoUtil.executeStatement(conn, statement, true);
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
     public boolean isValidLogin(Connection conn, Login login) throws SQLException {
         String statement = "SELECT secured_password FROM user WHERE email = ?";
         ResultSet resultSet =
