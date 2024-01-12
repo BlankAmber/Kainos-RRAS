@@ -24,14 +24,15 @@ import java.util.concurrent.TimeUnit;
 public class AuthController {
     private final AuthService authService = new AuthService(new AuthDao(), new DatabaseConnector());
 
+    private static final int DELAY_SECONDS = 10;
+    private static final int PERIOD_SECONDS = 10;
+
     public AuthController() {
         // Every 10 seconds the database is pinged.
         // This is a workaround to prevent the problem where if the backend is idle
         // for too long then it stops working temporarily.
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        int delaySeconds = 10;
-        int periodSeconds = 10;
-        scheduler.scheduleAtFixedRate(this::ping, delaySeconds, periodSeconds, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(this::ping, DELAY_SECONDS, PERIOD_SECONDS, TimeUnit.SECONDS);
     }
 
     @GET
